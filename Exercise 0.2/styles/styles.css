@@ -1,0 +1,107 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #836841;
+    background-color: #FBE79C;
+    font-size: 1.1rem;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 95%;
+    margin: 0 auto;
+}
+
+header {
+    padding: 15px 0;
+    border-bottom: 2px solid #836841;
+}
+
+.header-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .logo img {
+    max-width: 100px;
+}
+
+.nav-bar ul {
+    display: flex;
+}
+
+.nav-bar li {
+    margin-right: 50px;
+    list-style: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: 600;
+    position: relative;
+}
+
+.nav-bar li::after {
+    content: "";
+    width: 0;
+    height: 2px;
+    background-color: #F6A227;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-bar li:hover {
+    color: #F6A227;
+}
+
+.nav-bar li:hover::after {
+    width: 100%;
+}
+
+.home-page #home-nav-btn {
+    color: #F6A227;
+}
+
+.television-page #tele-nav-btn {
+    color: #F6A227;
+}
+
+.about-page #about-nav-btn {
+    color: #F6A227;
+}
+
+footer {
+    padding: 10px 0;
+    border-top: 1px solid rgb(131, 104, 65, 0.4);
+}
+
+.footer-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-body p {
+    color: rgba(68, 68, 78, 0.5);
+    font-style: italic;
+}
+
+.footer-body p:first-of-type {
+    font-style: normal;
+    font-weight: 600;
+    color: #836841;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 30px 0;
+}
+

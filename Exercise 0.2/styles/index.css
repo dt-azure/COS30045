@@ -1,0 +1,42 @@
+.content h1 {
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.content p:first-of-type, .content p:first-of-type a {
+    font-size: 0.8rem;
+    font-style: italic;
+    margin: 30px 0;
+}
+
+.highlight {
+    font-weight: 600;
+}
+
+table,
+th,
+td {
+  border: 1px solid #836841;
+}
+
+.table-1 {
+    margin: 30px 0;
+   border-spacing: 0;
+}
+
+.table-1 td, .table-1 th {
+    padding: 10px;
+}
+
+.content p {
+    line-height: 2rem;
+}
+
+.content h3 {
+    font-size: 1.4rem;
+    margin: 15px 0;
+}
+
+.content ul {
+    margin-left: 30px;
+}
