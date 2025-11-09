@@ -6,6 +6,8 @@
     <title>Australian Road Safety Police Enforcement Dashboard</title>
 
     <link rel="stylesheet" href="./styles/css/main.css">
+    <link rel="stylesheet" href="./styles/css/visualizations.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +49,7 @@
                         <button class="story-btn">Story 3</button>
                     </div>
 
-                    <div class="stat-cards">
+                    <!-- <div class="stat-cards">
                         <div class="card">
                             <div class="stats">
                                 <p>Percentage</p>
@@ -80,12 +82,12 @@
                                 <i class="fa-solid fa-chart-simple"></i>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="visualizations">
                         <div class="viz-content graph-1">
                             <div class="viz-title">
-                                <h3>Road Safety Enforcement Across Jurisdictions in 2024</h3>
+                                <h3>Total Fines By Jurisdiction</h3>
                             </div>
                             <div class="viz-container"></div>
                         </div>
@@ -93,34 +95,6 @@
                         <div class="viz-content graph-2">
                             <div class="viz-title">
                                 <h3>Violation Type Breakdown</h3>
-                            </div>
-                            <div class="viz-container"></div>
-                        </div>
-
-                        <div class="viz-content graph-3">
-                            <div class="viz-title">
-                                <h3>Road Safety Violators Age Breakdown</h3>
-                            </div>
-                            <div class="viz-container"></div>
-                        </div>
-
-                        <div class="viz-content graph-4">
-                            <div class="viz-title">
-                                <h3>Change in Road Safety Enforcement Over Time</h3>
-                            </div>
-                            <div class="viz-container"></div>
-                        </div>
-
-                        <div class="viz-content graph-5">
-                            <div class="viz-title">
-                                <h3>Detection Method Bias</h3>
-                            </div>
-                            <div class="viz-container"></div>
-                        </div>
-
-                        <div class="viz-content graph-6">
-                            <div class="viz-title">
-                                <h3>Offence-Type Concentration by Demographic</h3>
                             </div>
                             <div class="viz-container"></div>
                         </div>
@@ -137,5 +111,10 @@
     </footer>
 
     <script src="./js/scripts.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="./js/shared_constants.js"></script>
+    <script src="./js/load_data.js"></script>
+    <script src="./js/interactions.js"></script>
+    <script src="./js/story_1_visualizations.js"></script>
 </body>
 </html>

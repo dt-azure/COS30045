@@ -1,0 +1,24 @@
+jurisdiction,detection_group,sum_fines
+ACT,Camera,159354
+ACT,Other,299
+ACT,Police Issued,5884
+NSW,Other,9355
+NSW,Police Issued,417332
+NT,Camera,81016
+NT,Other,431
+NT,Police Issued,9786
+QLD,Camera,788312
+QLD,Other,25131
+QLD,Police Issued,118711
+SA,Camera,277335
+SA,Other,204
+SA,Police Issued,125101
+TAS,Camera,107172
+TAS,Other,253
+TAS,Police Issued,44449
+VIC,Camera,1660381
+VIC,Other,7087
+VIC,Police Issued,286011
+WA,Camera,1172635
+WA,Other,1969
+WA,Police Issued,120410
