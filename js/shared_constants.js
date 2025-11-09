@@ -7,6 +7,7 @@ const defaultDotRadius = 4;
 const colorMain = "#112D4E";
 const colorBlue1 = "#3F72AF";
 const colorBlue2 = "#DBE2EF";
+const colorPink = "#FFE3E1";
 
 const stateMap = {
   "NSW": "New South Wales",

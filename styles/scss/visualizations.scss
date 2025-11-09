@@ -114,6 +114,14 @@
         }
     }
 
+    .story-page {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+
     .visualizations {
         display: grid;
         gap: 30px;

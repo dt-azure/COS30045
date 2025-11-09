@@ -44,9 +44,9 @@
 
                 <div class="right-panel">
                     <div class="stories-switch">
-                        <button class="story-btn active">Story 1</button>
-                        <button class="story-btn">Story 2</button>
-                        <button class="story-btn">Story 3</button>
+                        <button class="story-btn active" data-story="1">Story 1</button>
+                        <button class="story-btn" data-story="2">Story 2</button>
+                        <button class="story-btn" data-story="3">Story 3</button>
                     </div>
 
                     <!-- <div class="stat-cards">
@@ -84,19 +84,43 @@
                         </div>
                     </div> -->
 
-                    <div class="visualizations">
-                        <div class="viz-content graph-1">
-                            <div class="viz-title">
-                                <h3>Total Fines By Jurisdiction</h3>
+                    <div class="story-page story-1 active">
+                        <div class="visualizations">
+                            <div class="viz-content graph-1">
+                                <div class="viz-title">
+                                    <h3>Total Fines By Jurisdiction, 2022 - 2024</h3>
+                                </div>
+                                <div class="viz-container"></div>
                             </div>
-                            <div class="viz-container"></div>
-                        </div>
 
-                        <div class="viz-content graph-2">
-                            <div class="viz-title">
-                                <h3>Violation Type Breakdown</h3>
+                            <div class="viz-content graph-2">
+                                <div class="viz-title">
+                                    <h3>Violation Type Breakdown</h3>
+                                </div>
+                                <div class="viz-container"></div>
                             </div>
-                            <div class="viz-container"></div>
+                        </div>
+                    </div>
+
+                    <div class="story-page story-2">
+                        <div class="visualizations">
+                            <div class="viz-content graph-1">
+                                <div class="viz-title">
+                                    <h3>Total Fines By Jurisdiction</h3>
+                                </div>
+                                <div class="viz-container"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="story-page story-3">
+                        <div class="visualizations">
+                            <div class="viz-content graph-1">
+                                <div class="viz-title">
+                                    <h3>Total Fines By Jurisdiction</h3>
+                                </div>
+                                <div class="viz-container"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -110,10 +134,10 @@
         </div>
     </footer>
 
-    <script src="./js/scripts.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="./js/shared_constants.js"></script>
     <script src="./js/load_data.js"></script>
+    <script src="./js/scripts.js"></script>
     <script src="./js/interactions.js"></script>
     <script src="./js/story_1_visualizations.js"></script>
 </body>

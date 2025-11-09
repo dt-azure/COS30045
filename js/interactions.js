@@ -1,7 +1,9 @@
-const addGraph1Interactions = (paths, lookup) => {
+const addGraph1Interactions = (paths, lookup, color) => {
     paths
         .on("mouseenter", function(e, d) {
-            d3.select(this).attr("stroke-width", 2);
+            d3.select(this)
+                .attr("stroke-width", 2)
+                .attr("fill", colorPink);
 
             const value = lookup.get(d.properties.STATE_NAME);
 
@@ -17,11 +19,15 @@ const addGraph1Interactions = (paths, lookup) => {
                 .style("left", (e.pageX + 15) + "px")
                 .style("top", (e.pageY + 15) + "px");
         })
-        .on("mouseleave", function() {
-            d3.select(this).attr("stroke-width", 1);
+        .on("mouseleave", function(e, d) {
+            d3.select(this)
+                .attr("stroke-width", 1)
+                .attr("fill", color(lookup.get(d.properties.STATE_NAME)));
+
             mapTooltip.style("opacity", 0);
         });
-}
+};
+
 
 
 const addGraph2Interactions = (hoverBars) => {

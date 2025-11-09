@@ -93,6 +93,12 @@
   font-size: 1.5rem;
   color: white;
 }
+.main .story-page {
+  display: none;
+}
+.main .story-page.active {
+  display: block;
+}
 .main .visualizations {
   display: grid;
   gap: 30px;
