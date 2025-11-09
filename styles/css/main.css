@@ -1,0 +1,214 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #F4F7FE;
+  color: #112D4E;
+}
+
+.container {
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+header, footer {
+  padding: 20px 0;
+}
+
+header {
+  border-bottom: 1px solid #D9D9D9;
+}
+header .header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header .logo {
+  font-size: 2rem;
+  font-weight: 800;
+}
+header .nav-bar ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 30px;
+}
+header .nav-bar li {
+  list-style-type: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+header .nav-bar li::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: #3F72AF;
+  transition: width 0.2s ease, left 0.2s ease;
+  transform: translateX(-50%);
+}
+header .nav-bar li:hover {
+  font-weight: 600;
+  color: #3F72AF;
+}
+header .nav-bar li:hover::after {
+  width: 100%;
+  left: 50%;
+}
+
+#homepage header .home-nav-btn, #about-page header .about-nav-btn, #contact-page header .contact-nav-btn {
+  font-weight: 600;
+}
+
+.main {
+  padding: 10px 0;
+}
+.main .main-content {
+  display: flex;
+}
+.main .left-panel {
+  width: 20%;
+  padding-right: 15px;
+}
+.main .left-panel .dashboard-info h1 {
+  font-weight: 900;
+  font-size: 3rem;
+  margin-bottom: 20px;
+  letter-spacing: 4px;
+}
+.main .left-panel .dashboard-info p {
+  text-align: justify;
+  line-height: 1.8rem;
+}
+.main .right-panel {
+  width: 80%;
+  padding-left: 15px;
+}
+.main .stories-switch {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.main .stories-switch .story-btn {
+  padding: 5px 80px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border: 1px solid #112D4E;
+  cursor: pointer;
+  background: none;
+}
+.main .stories-switch .story-btn.active {
+  background-color: #112D4E;
+  color: #F4F7FE;
+}
+.main .stories-switch .story-btn:not(.active):hover {
+  background-color: #3F72AF;
+  color: #F4F7FE;
+  border-color: #3F72AF;
+}
+.main .stories-switch .story-btn:first-of-type {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+.main .stories-switch .story-btn:last-of-type {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+.main .stat-cards {
+  display: grid;
+  gap: 50px;
+  grid-template-columns: repeat(12, 1fr);
+  justify-content: center;
+  align-items: center;
+  margin: 60px 0;
+  justify-content: space-between;
+}
+.main .stat-cards .card {
+  grid-column: span 4;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  border-radius: 12px;
+}
+.main .stat-cards .card .stats {
+  cursor: default;
+}
+.main .stat-cards .card .stats p:first-of-type {
+  color: #767676;
+  font-style: italic;
+  font-size: 0.8rem;
+}
+.main .stat-cards .card .stats p:last-of-type {
+  font-size: 2rem;
+  font-weight: 800;
+}
+.main .stat-cards .card .card-icon {
+  padding: 10px;
+  background-color: #3F72AF;
+  border: 1px solid #3F72AF;
+  border-radius: 8px;
+}
+.main .stat-cards .card .card-icon i {
+  font-size: 1.5rem;
+  color: white;
+}
+.main .visualizations {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(12, 1fr);
+}
+.main .visualizations .viz-content {
+  background-color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.main .visualizations .viz-content .viz-title {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+.main .visualizations .viz-content .viz-container {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  background: black;
+  opacity: 0.2;
+}
+.main .visualizations .viz-content.graph-1 {
+  grid-column: span 7;
+  height: 400px;
+}
+.main .visualizations .viz-content.graph-2 {
+  grid-column: span 5;
+  height: 400px;
+}
+.main .visualizations .viz-content.graph-3 {
+  grid-column: span 12;
+  height: 400px;
+}
+.main .visualizations .viz-content.graph-4 {
+  grid-column: span 12;
+  height: 400px;
+}
+.main .visualizations .viz-content.graph-5 {
+  grid-column: span 6;
+  height: 400px;
+}
+.main .visualizations .viz-content.graph-6 {
+  grid-column: span 6;
+  height: 400px;
+}/*# sourceMappingURL=main.css.map */

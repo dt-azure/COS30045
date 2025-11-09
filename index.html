@@ -3,109 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="./styles/styles.css">
-    <link rel="stylesheet" href="./styles/index.css">
+    <title>Australian Road Safety Police Enforcement Dashboard</title>
+
+    <link rel="stylesheet" href="./styles/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
-<body class="home-page">
+<body id="homepage">
     <header>
         <div class="container">
-            <div class="header-body">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="./img/website_logo.png" alt="Website Logo">
-                    </a>
-                </div>
-
+            <div class="header-content">
+                <div class="logo">DASHBOARD</div>
                 <div class="nav-bar">
                     <ul>
-                        <li id="home-nav-btn">Home</li>
-                        <li id="tele-nav-btn">Televisions</li>
-                        <li id="about-nav-btn">About Us</li>
+                        <li class="home-nav-btn">Home</li>
+                        <li class="about-nav-btn">About Us</li>
+                        <li class="contact-nav-btn">Contact</li>
                     </ul>
                 </div>
             </div>
         </div>
     </header>
 
-    <section class="content">
+    <section class="main">
         <div class="container">
-            <h1>How Much Energy Does Your TV Consume Each Year?</h1>
+            <div class="main-content">
+                <div class="left-panel">
+                    <div class="dashboard-info">
+                        <h1>INFO</h1>
 
-            <p>Joe and Joanne, a couple from an Australian suburb, are looking to build their own home theatre. They enjoy the big screen experience so they have their eyes on a 65-inch TV for their setup. However, as cost-conscious consumers living in a time of increasing costs of living, they are worried that their hobby will come with a big power bill. When the couple start looking at what are being offered, they soon find out just how many choices there are.</p>
+                        <p>
+                            Our visualization enables users to explore enforcement patterns by year, jurisdiction, detection type, location, and age group while identifying which demographics dominate specific offence types such as speeding, unlicensed driving, seat belt, and phone use.
+                        </p>
+                    </div>
+                </div>
 
-            <p>According to the Australian Department of Climate Change, Energy, the Environment and Water, there are currently over 2,600 TV models from 87 different brands currently on the market. On top of that, consumers have to choose between 3 main screen technologies: LCD, LCD (LED) and OLED. With so many options and technical jargons to go through, it can be overwhelming for the average consumer.</p>
+                <div class="right-panel">
+                    <div class="stories-switch">
+                        <button class="story-btn active">Story 1</button>
+                        <button class="story-btn">Story 2</button>
+                        <button class="story-btn">Story 3</button>
+                    </div>
 
-            <p>But do not feel discouraged if you are looking for a new TV like Joe and Joanne. Let us break down the data to see the best option for your new home cinema.</p>
+                    <div class="stat-cards">
+                        <div class="card">
+                            <div class="stats">
+                                <p>Percentage</p>
+                                <p>100%</p>
+                            </div>
 
-            <p>In order to accurately compare energy consumption for small and large screens, we will use the metric energy consumption per square inch per year instead of the total annual energy use.</p>
+                            <div class="card-icon">
+                                <i class="fa-solid fa-chart-pie"></i>
+                            </div>
+                        </div>
 
-            <div class="graph">
-                <img src="./img/graph_1.png" alt="Figure 1">
-                <p class="figure-desc">Figure 1: Energy Use per Inch of Screen (kWh/year) by Screen Size</p>
+                        <div class="card">
+                            <div class="stats">
+                                <p>Mean</p>
+                                <p>12.34</p>
+                            </div>
+
+                            <div class="card-icon">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="stats">
+                                <p>Total</p>
+                                <p>100,000</p>
+                            </div>
+
+                            <div class="card-icon">
+                                <i class="fa-solid fa-chart-simple"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="visualizations">
+                        <div class="viz-content graph-1">
+                            <div class="viz-title">
+                                <h3>Road Safety Enforcement Across Jurisdictions in 2024</h3>
+                            </div>
+                            <div class="viz-container"></div>
+                        </div>
+
+                        <div class="viz-content graph-2">
+                            <div class="viz-title">
+                                <h3>Violation Type Breakdown</h3>
+                            </div>
+                            <div class="viz-container"></div>
+                        </div>
+
+                        <div class="viz-content graph-3">
+                            <div class="viz-title">
+                                <h3>Road Safety Violators Age Breakdown</h3>
+                            </div>
+                            <div class="viz-container"></div>
+                        </div>
+
+                        <div class="viz-content graph-4">
+                            <div class="viz-title">
+                                <h3>Change in Road Safety Enforcement Over Time</h3>
+                            </div>
+                            <div class="viz-container"></div>
+                        </div>
+
+                        <div class="viz-content graph-5">
+                            <div class="viz-title">
+                                <h3>Detection Method Bias</h3>
+                            </div>
+                            <div class="viz-container"></div>
+                        </div>
+
+                        <div class="viz-content graph-6">
+                            <div class="viz-title">
+                                <h3>Offence-Type Concentration by Demographic</h3>
+                            </div>
+                            <div class="viz-container"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <span class="note">Note:</span>
-            <ul>
-                <li>Small: smaller than 40 inches</li>
-                <li>Medium: between 40 and 59 inches</li>
-                <li>Large: between 60 and 79 inches</li>
-                <li>Extra-Large: larger than 79 inches</li>
-            </ul>
-
-            <p>When we average out all the models, small screen sizes actually use more energy per square inch than larger ones. As screens get bigger they tend to be more efficient in their energy usage, so Joe and Joanne’s dream of a big screen is still alive.</p>
-        
-            <p>Next, let us look at screen technologies:</p>
-
-            <div class="graph">
-                <img src="./img/graph_2.png" alt="Figure 2">
-                <p class="figure-desc">Figure 2: Energy Use per Inch of Screen (kWh/year) by Screen Tehnology</p>
-            </div>
-
-            <p>The differences in energy consumption are actually quite small when we compare the average of the 3 screen technologies, which range from 0.27 to 0.28 kWh per square inch per year.</p>
-
-            <div class="graph">
-                <img src="./img/graph_3.png" alt="Figure 3">
-                <p class="figure-desc">Figure 3: Energy Use per Inch of Screen (kWh/year) by Screen Tehnology and Screen Size</p>
-            </div>            
-
-            <p>When we break things down by screen size, the story becomes clearer. Small TVs are the least efficient per square inch, no matter which technology you pick. As screens get bigger, the differences between LCD, LED, and OLED mostly shrink with large and extra-large TVs having the same energy consumption level. In other words, the biggest factor is screen size, not the technology it is made of.</p>
-
-            <p>Next, let’s see if brand choice also plays a role in energy efficiency. But before that, as we have established that small screen sizes are not what we are looking for we have filtered those out of our dataset. We are now down to 67 brands, which is still a lot for you to consider. Which is why we have decided to pick out the top 5 and bottom 5 brands:</p>
-
-            <div class="graph">
-                <img src="./img/graph_4.png" alt="Figure 4">
-                <p class="figure-desc">Figure 4: Top 5 and Bottom 5 Brands by Energy Use per Inch of Screen (kWh/year)</p>
-            </div>
-            
-            <p>And we have our winners: Hubbl, WALTON, FFALCON, SYLVOX and DGTEC are the best performing brands in terms of energy efficiency. On the other hand, brands like ENGLAON, DEVANTI, VEON, Viano and Sylnox take the bottom spots of our ranking. Note that this does not mean their products are bad, just that their TVs are less efficient when it comes to energy use.</p>
-
-            <p>Of course, we are being a little tongue-in-cheek here. We understand that when browsing for a new TV (or any electronic appliance for that matter), other factors also come into play such as price, availability, customer service, warranty and so on. Still, if you are concerned about your power bill in the long run, you know what to look for. Hopefully this breakdown helps point you in the right direction to build your very own cinema at home.</p>
-        </div>
-    </section>
-
-    <section class="d3-demo">
-        <div class="responsive-svg-container">
-            
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <div class="footer-body">
-                <p>COS30045 - Data Visualization</p>
 
-                <p> | </p>
-
-                <p>Designed by Nguyen Duc Trung - 105508266</p>
-            </div>
-
-            <p class="ai-claim">This website is designed without the help of generative AI.</p>
         </div>
     </footer>
 
-    <script src="./script/script.js"></script>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="./script/d3.js"></script>
+    <script src="./js/scripts.js"></script>
 </body>
 </html>
