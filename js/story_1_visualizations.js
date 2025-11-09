@@ -57,7 +57,7 @@ const createGraph1 = (geojson, data) => {
     const legendHeight = 12;
 
     const legend = svg.append("g")
-                      .attr("transform", `translate(${width/2 - legendWidth/2}, ${height - 60})`);
+                      .attr("transform", `translate(${width/2 - legendWidth/2 - 20}, ${height - 60})`);
 
     const defs = legend.append("defs");
 
@@ -84,11 +84,12 @@ const createGraph1 = (geojson, data) => {
 
     const legendScale = d3.scaleLinear()
                           .domain([0, max])
+                          .nice()
                           .range([0, legendWidth]);
 
     const legendAxis = d3.axisBottom(legendScale)
                          .ticks(4)
-                         .tickFormat(d3.format("~s"));
+                         .tickFormat(d3.format(".2s"));
 
     legend.append("g")
              .attr("transform", `translate(0, ${legendHeight})`)
