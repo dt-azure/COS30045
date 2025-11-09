@@ -8,3 +8,13 @@ const colorMain = "#112D4E";
 const colorBlue1 = "#3F72AF";
 const colorBlue2 = "#DBE2EF";
 
+const stateMap = {
+  "NSW": "New South Wales",
+  "VIC": "Victoria",
+  "QLD": "Queensland",
+  "WA": "Western Australia",
+  "SA": "South Australia",
+  "TAS": "Tasmania",
+  "NT": "Northern Territory",
+  "ACT": "Australian Capital Territory"
+};

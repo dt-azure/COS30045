@@ -1,78 +1,53 @@
-const createGraph1 = (data) => {
-    const container = d3.select('.graph-1 .viz-container');
-    const { width, height } = container.node().getBoundingClientRect();
-
-    const margin = { top: 20, right: 20, bottom: 50, left: 80 };
-    const innerWidth = width - margin.left - margin.right;
-    const innerHeight = height - margin.top - margin.bottom;
-
-    const meanRow = data.find(d => d.jurisdiction === "Mean");
-    const filtered = data.filter(d => d.jurisdiction !== "Mean");
-
-    const svg = container.append("svg")
-                         .attr("width", width)
-                         .attr("height", height);
-
-    const g = svg.append("g")
-                 .attr("transform", `translate(${margin.left},${margin.top})`);
-
-    const x = d3.scaleBand()
-                .domain(filtered.map(d => d.jurisdiction))
-                .range([0, innerWidth])
-                .padding(0.2);
-
-    const y = d3.scaleLinear()
-                .domain([0, d3.max(filtered, d => d.total_fines)])
-                .nice()
-                .range([innerHeight, 0]);
-
-    const bars = g.selectAll("rect")
-                  .data(filtered)
-                  .enter()
-                  .append("rect")
-                  .attr("x", d => x(d.jurisdiction))
-                  .attr("y", d => y(d.total_fines))
-                  .attr("width", x.bandwidth())
-                  .attr("height", d => innerHeight - y(d.total_fines))
-                  .attr("fill", colorMain);
-
-    if (meanRow) {
-        g.append("line")
-         .attr("x1", 0)
-         .attr("x2", innerWidth)
-         .attr("y1", y(meanRow.total_fines))
-         .attr("y2", y(meanRow.total_fines))
-         .attr("stroke", "#888")
-         .attr("stroke-dasharray", "6 3")
-         .attr("stroke-width", 2);
-    }
-
-    g.append("text")
-     .attr("x", innerWidth + 20)
-     .attr("y", y(meanRow.total_fines) - 6)
-     .attr("text-anchor", "end")
-     .attr("fill", "#555")
-     .attr("font-size", 12)
-     .text("Mean");
+const mapTooltip = d3.select("body")
+    .append("div")
+    .style("position", "absolute")
+    .style("background", "#fff")
+    .style("padding", "8px 12px")
+    .style("border", "1px solid #ccc")
+    .style("border-radius", "6px")
+    .style("pointer-events", "none")
+    .style("font-size", "14px")
+    .style("opacity", 0);
 
 
-    const xAxis = g.append("g")
-     .attr("transform", `translate(0,${innerHeight})`)
-     .call(d3.axisBottom(x));
+const createGraph1 = (geojson, data) => {
 
-    xAxis.selectAll("text")
-         .style("font-size", "14px")
-         .style("font-weight", "500");
+  geojson.features = geojson.features.filter(f =>
+      +f.properties.STATE_CODE >= 1 && +f.properties.STATE_CODE <= 8
+  );
 
-    const yAxis = g.append("g")
-     .call(d3.axisLeft(y));
+  const container = d3.select(".graph-1 .viz-container");
+  const { width, height } = container.node().getBoundingClientRect();
 
-    yAxis.selectAll("text")
-         .style("font-size", "14px")
-         .style("font-weight", "500");
+  const svg = container.append("svg")
+      .attr("width", width)
+      .attr("height", height);
 
-    addGraph1Interactions(bars);
+  const lookup = new Map(data.map(
+      d => [ stateMap[d.jurisdiction], d.total_fines ]
+  ));
+
+  const projection = d3.geoMercator()
+      .fitSize([width, height], geojson);
+
+  const path = d3.geoPath().projection(projection);
+
+  const max = d3.max(data, d => d.total_fines);
+  const color = d3.scaleSequential()
+      .domain([0, max])
+      .interpolator(d3.interpolateBlues);
+
+  const paths = svg.selectAll("path")
+      .data(geojson.features)
+      .enter().append("path")
+      .attr("d", path)
+      .attr("fill", d => color(lookup.get(d.properties.STATE_NAME)))
+      .attr("stroke", "#fff")
+      .attr("stroke-width", 1);
+
+    addGraph1Interactions(paths, lookup, color);
 }
+
 
 const createGraph2 = (data) => {
     const container = d3.select(".graph-2 .viz-container");

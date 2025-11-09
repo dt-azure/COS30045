@@ -1,12 +1,14 @@
-d3.csv("./data/total_fines_arrests_charges_jurisdictions.csv", d => {
-    return {
+Promise.all([
+  d3.json("./data/australian_states.json"),
+  d3.csv("./data/total_fines_arrests_charges_jurisdictions.csv", d => ({
         jurisdiction: d.jurisdiction,
         total_fines: +d.sum_fines,
         total_arrests: +d.sum_arrests,
         total_charges: +d.sum_charges
-    };
-}).then(data => {
-    createGraph1(data);
+  }))
+])
+.then(([geo, data]) => {
+    createGraph1(geo, data);
 }).catch(error => {
     console.log("Error loading data: ", error);
 });

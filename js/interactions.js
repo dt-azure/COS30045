@@ -1,33 +1,28 @@
-const addGraph1Interactions = (bars) => {
-    const tooltip = d3.select("body")
-                      .append("div")
-                      .style("position", "absolute")
-                      .style("background", "#fff")
-                      .style("padding", "6px 10px")
-                      .style("border", "1px solid #ccc")
-                      .style("border-radius", "4px")
-                      .style("pointer-events", "none")
-                      .style("font-size", "12px")
-                      .style("opacity", 0)
-                      .attr("class", "tooltip graph-1");;
+const addGraph1Interactions = (paths, lookup) => {
+    paths
+        .on("mouseenter", function(e, d) {
+            d3.select(this).attr("stroke-width", 2);
 
-  bars.on("mouseenter", function(e, d) {
-      d3.select(this).attr("fill", colorBlue1);
-      tooltip
-        .style("opacity", 1)
-        .html(`
-          <strong>${d.jurisdiction}</strong><br>
-          Fines: ${d.total_fines.toLocaleString()}
-        `);
-    }).on("mousemove", function(e) {
-      tooltip
-        .style("left", (e.pageX + 12) + "px")
-        .style("top", (e.pageY + 12) + "px");
-    }).on("mouseleave", function() {
-      d3.select(this).attr("fill", colorMain);
-      tooltip.style("opacity", 0);
-    });
+            const value = lookup.get(d.properties.STATE_NAME);
+
+            mapTooltip
+                .style("opacity", 1)
+                .html(`
+                    <strong>${d.properties.STATE_NAME}</strong><br>
+                    ${value.toLocaleString()} fines
+                `);
+        })
+        .on("mousemove", function(e) {
+            mapTooltip
+                .style("left", (e.pageX + 15) + "px")
+                .style("top", (e.pageY + 15) + "px");
+        })
+        .on("mouseleave", function() {
+            d3.select(this).attr("stroke-width", 1);
+            mapTooltip.style("opacity", 0);
+        });
 }
+
 
 const addGraph2Interactions = (hoverBars) => {
     const tooltip = d3.select("body")
