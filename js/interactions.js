@@ -60,3 +60,48 @@ hoverBars
   })
   .on("mouseleave", () => tooltip.style("opacity", 0));
 }
+
+const initGraph3 = (data) => {
+    const jurisdictions = Array.from(new Set(data.map(d => d.jurisdiction))).sort();
+    const select = d3.select("#graph-3-select");
+
+    select.append("option")
+          .attr("value", "Australia")
+          .text("Australia (Overall)");
+
+    jurisdictions.forEach(j => {
+        select.append("option")
+              .attr("value", j)
+              .text(j);
+    });
+
+    createGraph3("Australia", data);
+
+    select.on("change", () => {
+        createGraph3(select.node().value, data);
+    });
+}
+
+const addGraph3Interactions = (rects) => {
+  rects.on("mouseover", function (event, d) {
+      tooltip.style("opacity", 1)
+             .html(`<strong>Age group: ${d.age}</strong><br>${(d.proportion * 100).toFixed(1)}%`);
+    }).on("mousemove", function (event) {
+      tooltip.style("left", (event.pageX + 12) + "px")
+             .style("top", (event.pageY + 12) + "px");
+    }).on("mouseout", () => {
+      tooltip.style("opacity", 0);
+    });
+}
+
+const addGraph4Interactions = (circles) => {
+    circles.on("mouseover", (event, d) => {
+      tooltip.style("opacity", 1)
+             .html(`<strong>${d.age_group}</strong><br>${d.total_fines.toLocaleString()} fines`);
+    }).on("mousemove", (event) => {
+      tooltip.style("left", (event.pageX + 12) + "px")
+             .style("top", (event.pageY + 12) + "px");
+    }).on("mouseout", () => {
+      tooltip.style("opacity", 0);
+    });
+}

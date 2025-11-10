@@ -19,3 +19,17 @@ const stateMap = {
   "NT": "Northern Territory",
   "ACT": "Australian Capital Territory"
 };
+
+const ageOrder = ["0-16", "17-25", "26-39", "40-64", "65 and over"];
+
+const ageColors = {
+  "0-16":        "#4C72B0",
+  "17-25":       "#55A868",
+  "26-39":       "#C44E52",
+  "40-64":       "#8172B2",
+  "65 and over": "#CCB974"
+};
+
+const ageColorMapping = d3.scaleOrdinal()
+                          .domain(ageOrder)
+                          .range(ageOrder.map(a => ageColors[a]));

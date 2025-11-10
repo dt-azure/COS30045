@@ -104,10 +104,29 @@
 
                     <div class="story-page story-2">
                         <div class="visualizations">
-                            <div class="viz-content graph-1">
+                            <div class="viz-content graph-3">
                                 <div class="viz-title">
-                                    <h3>Total Fines By Jurisdiction</h3>
+                                    <h3>Fine Distribution by Age Group (%)</h3>
                                 </div>
+
+                                <div class="viz-controls">
+                                    <label for="graph-3-select">Jurisdiction:</label>
+                                    <select id="graph-3-select"></select>
+                                </div>
+
+                                <div class="viz-container"></div>
+                            </div>
+
+                            <div class="viz-content graph-4">
+                                <div class="viz-title">
+                                    <h3>Total Fines by Age Group</h3>
+                                </div>
+
+                                <div class="viz-controls">
+                                    <label for="graph-4-select">Jurisdiction:</label>
+                                    <select id="graph-4-select"></select>
+                                </div>
+
                                 <div class="viz-container"></div>
                             </div>
                         </div>
@@ -136,9 +155,12 @@
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="./js/shared_constants.js"></script>
+    <script src="./js/helper.js"></script>
     <script src="./js/load_data.js"></script>
     <script src="./js/scripts.js"></script>
     <script src="./js/interactions.js"></script>
     <script src="./js/story_1_visualizations.js"></script>
+    <script src="./js//story_2_visualizations.js"></script>
+    <script src="./js/story_3_visualizations.js"></script>
 </body>
 </html>

@@ -18,6 +18,9 @@ const createGraph1 = (geojson, data) => {
     );
 
     const container = d3.select(".graph-1 .viz-container");
+
+    container.selectAll("svg").remove();
+
     const { width, height } = container.node().getBoundingClientRect();
 
     const svg = container.append("svg")
@@ -111,12 +114,13 @@ const createGraph1 = (geojson, data) => {
 
 const createGraph2 = (data) => {
     const container = d3.select(".graph-2 .viz-container");
+
+    container.selectAll("svg").remove();
+
     const { width, height } = container.node().getBoundingClientRect();
 
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
-
-    const ageOrder = ["0-16", "17-25", "26-39", "40-64", "65 and over"];
 
     const nested = d3.rollups(
         data,

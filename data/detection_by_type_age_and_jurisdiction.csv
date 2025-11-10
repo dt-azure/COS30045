@@ -1,0 +1,116 @@
+jurisdiction,age_group,detection_group,total_fines
+ACT,0-16,Camera,46
+ACT,0-16,Other,11
+ACT,0-16,Police Issued,87
+ACT,17-25,Camera,20320
+ACT,17-25,Other,90
+ACT,17-25,Police Issued,1744
+ACT,26-39,Camera,48603
+ACT,26-39,Other,115
+ACT,26-39,Police Issued,2212
+ACT,40-64,Camera,70396
+ACT,40-64,Other,82
+ACT,40-64,Police Issued,1682
+ACT,65 and over,Camera,19989
+ACT,65 and over,Other,1
+ACT,65 and over,Police Issued,159
+NSW,0-16,Other,57
+NSW,0-16,Police Issued,470
+NSW,17-25,Other,2962
+NSW,17-25,Police Issued,108014
+NSW,26-39,Other,3939
+NSW,26-39,Police Issued,144660
+NSW,40-64,Other,2173
+NSW,40-64,Police Issued,137166
+NSW,65 and over,Other,224
+NSW,65 and over,Police Issued,27022
+NT,0-16,Camera,84
+NT,0-16,Other,2
+NT,0-16,Police Issued,35
+NT,17-25,Camera,10261
+NT,17-25,Other,101
+NT,17-25,Police Issued,1945
+NT,26-39,Camera,27535
+NT,26-39,Other,209
+NT,26-39,Police Issued,3816
+NT,40-64,Camera,35026
+NT,40-64,Other,114
+NT,40-64,Police Issued,3482
+NT,65 and over,Camera,8110
+NT,65 and over,Other,5
+NT,65 and over,Police Issued,508
+QLD,0-16,Camera,21001
+QLD,0-16,Other,583
+QLD,0-16,Police Issued,62
+QLD,17-25,Camera,110579
+QLD,17-25,Other,6966
+QLD,17-25,Police Issued,27371
+QLD,26-39,Camera,241955
+QLD,26-39,Other,10435
+QLD,26-39,Police Issued,39598
+QLD,40-64,Camera,331267
+QLD,40-64,Other,6719
+QLD,40-64,Police Issued,43224
+QLD,65 and over,Camera,83510
+QLD,65 and over,Other,428
+QLD,65 and over,Police Issued,8456
+SA,0-16,Camera,26
+SA,0-16,Other,0
+SA,0-16,Police Issued,63
+SA,17-25,Camera,29051
+SA,17-25,Other,1
+SA,17-25,Police Issued,22636
+SA,26-39,Camera,74386
+SA,26-39,Other,2
+SA,26-39,Police Issued,41339
+SA,40-64,Camera,129179
+SA,40-64,Other,2
+SA,40-64,Police Issued,48454
+SA,65 and over,Camera,44693
+SA,65 and over,Other,199
+SA,65 and over,Police Issued,12609
+TAS,0-16,Camera,25
+TAS,0-16,Other,0
+TAS,0-16,Police Issued,3
+TAS,17-25,Camera,12445
+TAS,17-25,Other,41
+TAS,17-25,Police Issued,9185
+TAS,26-39,Camera,32641
+TAS,26-39,Other,108
+TAS,26-39,Police Issued,14540
+TAS,40-64,Camera,45051
+TAS,40-64,Other,100
+TAS,40-64,Police Issued,15936
+TAS,65 and over,Camera,17010
+TAS,65 and over,Other,4
+TAS,65 and over,Police Issued,4785
+VIC,0-16,Camera,3
+VIC,0-16,Other,61
+VIC,0-16,Police Issued,124
+VIC,17-25,Camera,134199
+VIC,17-25,Other,1737
+VIC,17-25,Police Issued,51923
+VIC,26-39,Camera,491752
+VIC,26-39,Other,3266
+VIC,26-39,Police Issued,101622
+VIC,40-64,Camera,792004
+VIC,40-64,Other,1830
+VIC,40-64,Police Issued,109315
+VIC,65 and over,Camera,242423
+VIC,65 and over,Other,193
+VIC,65 and over,Police Issued,23027
+WA,0-16,Camera,1179
+WA,0-16,Other,0
+WA,0-16,Police Issued,11
+WA,17-25,Camera,134339
+WA,17-25,Other,412
+WA,17-25,Police Issued,22064
+WA,26-39,Camera,354003
+WA,26-39,Other,865
+WA,26-39,Police Issued,42234
+WA,40-64,Camera,545633
+WA,40-64,Other,621
+WA,40-64,Police Issued,47187
+WA,65 and over,Camera,137481
+WA,65 and over,Other,71
+WA,65 and over,Police Issued,8914

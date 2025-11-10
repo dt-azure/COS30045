@@ -129,14 +129,14 @@
 }
 .main .visualizations .viz-content.graph-2 {
   grid-column: span 12;
-  height: 600px;
+  height: 400px;
 }
 .main .visualizations .viz-content.graph-3 {
-  grid-column: span 12;
+  grid-column: span 6;
   height: 400px;
 }
 .main .visualizations .viz-content.graph-4 {
-  grid-column: span 12;
+  grid-column: span 6;
   height: 400px;
 }
 .main .visualizations .viz-content.graph-5 {
@@ -153,4 +153,11 @@
 }
 .tooltip.graph-2 {
   line-height: 2rem;
+}
+.tooltip.graph-3 {
+  line-height: 1.4rem;
+}
+
+.viz-controls {
+  margin-bottom: 40px;
 }/*# sourceMappingURL=visualizations.css.map */
