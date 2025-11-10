@@ -160,4 +160,13 @@
 
 .viz-controls {
   margin-bottom: 40px;
+}
+
+.viz-controls select {
+  margin-left: 10px;
+  padding: 3px 10px;
+  font-size: 14px;
+  border: 1px solid #112D4E;
+  border-radius: 4px;
+  background: none;
 }/*# sourceMappingURL=visualizations.css.map */
