@@ -65,4 +65,22 @@ header .nav-bar li:hover::after {
 
 #homepage header .home-nav-btn, #about-page header .about-nav-btn, #contact-page header .contact-nav-btn {
   font-weight: 600;
+}
+
+footer {
+  border-top: 1px solid #D9D9D9;
+  margin-top: 40px;
+}
+footer .footer-content .creator {
+  text-align: center;
+  margin-bottom: 15px;
+}
+footer .footer-content .creator span {
+  font-weight: 700;
+}
+footer .footer-content .declaration {
+  text-align: center;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: #767676;
 }/*# sourceMappingURL=main.css.map */

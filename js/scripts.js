@@ -43,7 +43,3 @@ storyButtons.forEach(btn => {
     }
   });
 });
-
-
-loadStory1();
-story1Loaded = true;
