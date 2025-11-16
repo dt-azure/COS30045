@@ -44,9 +44,10 @@
 
                 <div class="right-panel">
                     <div class="stories-switch">
-                        <button class="story-btn active" data-story="1">Story 1</button>
-                        <button class="story-btn" data-story="2">Story 2</button>
-                        <button class="story-btn" data-story="3">Story 3</button>
+                        <button class="story-btn active" data-story="overview">Overview</button>
+                        <button class="story-btn" data-story="1">The Landscape</button>
+                        <button class="story-btn" data-story="2">Bias</button>
+                        <button class="story-btn" data-story="3">Fines, Arrests and Charges</button>
                     </div>
 
                     <!-- <div class="stat-cards">
@@ -84,29 +85,34 @@
                         </div>
                     </div> -->
 
+                    <div class="story-page story-overview">
+                    </div>
+                    
                     <div class="story-page story-1 active">
                         <div class="visualizations">
                             <div class="viz-content graph-1">
                                 <div class="viz-title">
-                                    <h3>Total Fines By Jurisdiction, 2022 - 2024</h3>
+                                    <h3>Total Fines By Jurisdiction, 2023 - 2024</h3>
                                 </div>
                                 <div class="viz-container"></div>
                             </div>
 
                             <div class="viz-content graph-2">
                                 <div class="viz-title">
-                                    <h3>Violation Type Breakdown</h3>
+                                    <h3>Fines Issued Trend, 2023 - 2024</h3>
                                 </div>
+
+                                <div class="viz-controls">
+                                    <label for="graph-1-select">Year:</label>
+                                    <select id="graph-1-select"></select>
+                                </div>
+
                                 <div class="viz-container"></div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="story-page story-2">
-                        <div class="visualizations">
                             <div class="viz-content graph-3">
                                 <div class="viz-title">
-                                    <h3>Fine Distribution by Age Group (%)</h3>
+                                    <h3>Violation Type Breakdown, 2023 - 2024</h3>
                                 </div>
 
                                 <div class="viz-controls">
@@ -117,14 +123,38 @@
                                 <div class="viz-container"></div>
                             </div>
 
-                            <div class="viz-content graph-4">
+                            <!-- <div class="viz-content graph-4">
+                                <div class="viz-title">
+                                    <h3>Violation Type Breakdown</h3>
+                                </div>
+                                <div class="viz-container"></div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="story-page story-2">
+                        <div class="visualizations">
+                            <div class="viz-content graph-">
+                                <div class="viz-title">
+                                    <h3>Fine Distribution by Age Group (%)</h3>
+                                </div>
+
+                                <div class="viz-controls">
+                                    <label for="graph--select">Jurisdiction:</label>
+                                    <select id="graph--select"></select>
+                                </div>
+
+                                <div class="viz-container"></div>
+                            </div>
+
+                            <div class="viz-content graph-">
                                 <div class="viz-title">
                                     <h3>Total Fines by Age Group</h3>
                                 </div>
 
                                 <div class="viz-controls">
-                                    <label for="graph-4-select">Jurisdiction:</label>
-                                    <select id="graph-4-select"></select>
+                                    <label for="graph--select">Jurisdiction:</label>
+                                    <select id="graph--select"></select>
                                 </div>
 
                                 <div class="viz-container"></div>
@@ -134,7 +164,7 @@
 
                     <div class="story-page story-3">
                         <div class="visualizations">
-                            <div class="viz-content graph-1">
+                            <div class="viz-content">
                                 <div class="viz-title">
                                     <h3>Total Fines By Jurisdiction</h3>
                                 </div>

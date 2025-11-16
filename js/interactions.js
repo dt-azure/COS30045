@@ -3,7 +3,7 @@ const addGraph1Interactions = (paths, lookup, color) => {
         .on("mouseenter", function(e, d) {
             d3.select(this)
                 .attr("stroke-width", 2)
-                .attr("fill", colorPink);
+                .attr("fill", colorBlue3);
 
             const value = lookup.get(d.properties.STATE_NAME);
 
@@ -29,79 +29,129 @@ const addGraph1Interactions = (paths, lookup, color) => {
 };
 
 
+const addGraph2Interactions = (g, filtered, x, y, innerWidth, innerHeight) => {
+  const tooltip = d3.select(".tooltip")
+  
+  const hoverLine = g.append("line")
+        .attr("stroke", "#999")
+        .attr("stroke-width", 1)
+        .attr("y1", 0)
+        .attr("y2", innerHeight)
+        .style("opacity", 0);
 
-const addGraph2Interactions = (hoverBars) => {
-    const tooltip = d3.select("body")
-                      .append("div")
-                      .style("position", "absolute")
-                      .style("background", "#fff")
-                      .style("padding", "8px 12px")
-                      .style("border", "1px solid #ccc")
-                      .style("border-radius", "4px")
-                      .style("pointer-events", "none")
-                      .style("font-size", "12px")
-                      .style("opacity", 0)
-                      .attr("class", "tooltip graph-2");
 
-hoverBars
-  .on("mouseenter", function(e, d) {
-    tooltip.style("opacity", 1);
+    const hoverCircle = g.append("circle")
+        .attr("r", 4)
+        .attr("fill", "#3F72AF")
+        .attr("stroke", "white")
+        .attr("stroke-width", 1.5)
+        .style("opacity", 0);
 
-    tooltip.html(`
-      <strong>Age group: ${d.age_group}</strong><br>
-      Camera: ${d.Camera.toFixed(2)}%<br>
-      Police Issued: ${d["Police Issued"].toFixed(2)}%<br>
-      Other: ${d.Other.toFixed(2)}%
-    `);
-  })
-  .on("mousemove", e => {
-    tooltip.style("left", (e.pageX + 14) + "px")
-           .style("top",  (e.pageY + 14) + "px");
-  })
-  .on("mouseleave", () => tooltip.style("opacity", 0));
+
+    const bisect = d3.bisector(d => d.date).left;
+
+    function onMouseMove(event) {
+        const [mx] = d3.pointer(event);
+
+        const hoveredDate = x.invert(mx);
+        const index = bisect(filtered, hoveredDate);
+
+        const d0 = filtered[index - 1];
+        const d1 = filtered[index];
+        const closest =
+            !d0 ? d1 :
+            !d1 ? d0 :
+            (hoveredDate - d0.date) > (d1.date - hoveredDate) ? d1 : d0;
+
+        hoverLine
+            .attr("x1", x(closest.date))
+            .attr("x2", x(closest.date))
+            .style("opacity", 1);
+
+        hoverCircle
+            .attr("cx", x(closest.date))
+            .attr("cy", y(closest.total_fines))
+            .style("opacity", 1);
+
+        tooltip
+            .style("opacity", 1)
+            .html(`
+                <strong>${d3.timeFormat("%b %Y")(closest.date)}</strong><br>
+                Fines Issued: ${closest.total_fines.toLocaleString()}
+            `)
+            .style("left", (event.pageX + 15) + "px")
+            .style("top", (event.pageY - 28) + "px");
+    }
+
+    function onMouseLeave() {
+        hoverLine.style("opacity", 0);
+        hoverCircle.style("opacity", 0);
+        tooltip.style("opacity", 0);
+    }
+
+    g.append("rect")
+        .attr("width", innerWidth)
+        .attr("height", innerHeight)
+        .style("fill", "none")
+        .style("pointer-events", "all")
+        .on("mousemove", onMouseMove)
+        .on("mouseleave", onMouseLeave);
 }
 
-const initGraph3 = (data) => {
-    const jurisdictions = Array.from(new Set(data.map(d => d.jurisdiction))).sort();
-    const select = d3.select("#graph-3-select");
+function addGraph3Interactions(g, arcs, arc, filtered) {
+    const tooltip = d3.select(".tooltip");
 
-    select.append("option")
-          .attr("value", "Australia")
-          .text("Australia (Overall)");
+    const slices = g.selectAll("path")
+        .data(arcs)
+        .enter()
+        .append("path")
+        .attr("d", arc)
+        .attr("fill", d => offenceTypeColors[d.data.offence_type])
+        .attr("stroke", "white")
+        .attr("stroke-width", 1.5)
+        .style("cursor", "pointer")
+        .style("transition", "all 0.1s ease");
 
-    jurisdictions.forEach(j => {
-        select.append("option")
-              .attr("value", j)
-              .text(j);
-    });
+    const totalSum = d3.sum(filtered, d => d.total_fines);
 
-    createGraph3("Australia", data);
+    slices
+        .on("mousemove", function (event, d) {
+            d3.select(this)
+                .transition()
+                .duration(80)
+                .attr("d", d3.arc()
+                    .outerRadius(arc.outerRadius()() + 10)
+                    .innerRadius(0)
+                );
 
-    select.on("change", () => {
-        createGraph3(select.node().value, data);
-    });
+            tooltip
+                .style("opacity", 1)
+                .html(`
+                    <strong>${d.data.offence_type}</strong><br>
+                    Fines Issued: ${d.data.total_fines.toLocaleString()} fines<br>
+                    Percentage: ${d3.format(".0%")(d.data.total_fines / totalSum)}
+                `)
+                .style("left", (event.pageX + 15) + "px")
+                .style("top", (event.pageY - 20) + "px");
+        })
+        .on("mouseleave", function () {
+            d3.select(this)
+                .transition()
+                .duration(100)
+                .attr("d", arc);
+
+            tooltip.style("opacity", 0);
+        });
 }
 
-const addGraph3Interactions = (rects) => {
-  rects.on("mouseover", function (event, d) {
-      tooltip.style("opacity", 1)
-             .html(`<strong>Age group: ${d.age}</strong><br>${(d.proportion * 100).toFixed(1)}%`);
-    }).on("mousemove", function (event) {
-      tooltip.style("left", (event.pageX + 12) + "px")
-             .style("top", (event.pageY + 12) + "px");
-    }).on("mouseout", () => {
-      tooltip.style("opacity", 0);
-    });
-}
-
-const addGraph4Interactions = (circles) => {
-    circles.on("mouseover", (event, d) => {
-      tooltip.style("opacity", 1)
-             .html(`<strong>${d.age_group}</strong><br>${d.total_fines.toLocaleString()} fines`);
-    }).on("mousemove", (event) => {
-      tooltip.style("left", (event.pageX + 12) + "px")
-             .style("top", (event.pageY + 12) + "px");
-    }).on("mouseout", () => {
-      tooltip.style("opacity", 0);
-    });
-}
+// const addGraph4Interactions = (circles) => {
+//     circles.on("mouseover", (event, d) => {
+//       tooltip.style("opacity", 1)
+//              .html(`<strong>${d.age_group}</strong><br>${d.total_fines.toLocaleString()} fines`);
+//     }).on("mousemove", (event) => {
+//       tooltip.style("left", (event.pageX + 12) + "px")
+//              .style("top", (event.pageY + 12) + "px");
+//     }).on("mouseout", () => {
+//       tooltip.style("opacity", 0);
+//     });
+// }

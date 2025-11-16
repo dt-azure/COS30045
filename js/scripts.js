@@ -5,6 +5,7 @@ let story3Loaded = false;
 
 const storyButtons = document.querySelectorAll('.story-btn');
 const storyPages = document.querySelectorAll('.story-page');
+const infoSection = document.querySelector('.dashboard-info');
 
 storyButtons.forEach(btn => {
   btn.addEventListener('click', () => {
@@ -34,8 +35,15 @@ storyButtons.forEach(btn => {
         loadStory3();
         story3Loaded = true;
     }
+
+    if (storyId === "overview") {
+      infoSection.classList.remove('active');
+    } else {
+      infoSection.classList.add('active');
+    }
   });
 });
+
 
 loadStory1();
 story1Loaded = true;

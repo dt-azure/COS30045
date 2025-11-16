@@ -3,18 +3,6 @@ const barHeight = 80;
 const lollipopWidth = 650;
 const lollipopHeight = 250;
 
-const tooltip = d3.select("body")
-                  .append("div")
-                  .attr("class", "tooltip graph-3")
-                  .style("position", "absolute")
-                  .style("pointer-events", "none")
-                  .style("padding", "6px 10px")
-                  .style("background", "white")
-                  .style("border", "1px solid #ccc")
-                  .style("border-radius", "4px")
-                  .style("font-size", "12px")
-                  .style("opacity", 0);
-
 const drawStackedBar = (data, svgSelector, barWidth) => {
         const svg = d3.select(svgSelector);
         svg.selectAll("*").remove();
@@ -129,146 +117,146 @@ function drawLollipop(data, svg, width, height) {
 }
 
 
-const createGraph3 = (preppedData) => {
-    const container = d3.select(".graph-3 .viz-container");
-    const containerWidth = container.node().getBoundingClientRect().width;
+// const createGraph3 = (preppedData) => {
+//     const container = d3.select(".graph-3 .viz-container");
+//     const containerWidth = container.node().getBoundingClientRect().width;
 
-    container.selectAll("svg").remove();
-
-
-    const overallBlock = container.append("div")
-                                  .attr("class", "graph3-bar-block")
-                                  .style("margin-bottom", "20px");
-
-    overallBlock.append("div")
-                .attr("class", "bar-title")
-                .style("font-size", "14px")
-                .style("font-weight", "600")
-                .style("margin-bottom", "4px")
-                .text("Australia Overall");
-
-    const svgOverall = overallBlock.append("svg")
-                                   .attr("id", "graph-3-overall")
-                                   .attr("width", containerWidth)
-                                   .attr("height", barHeight);
+//     container.selectAll("svg").remove();
 
 
-    const selectedBlock = container.append("div")
-                                   .attr("class", "graph3-bar-block");
+//     const overallBlock = container.append("div")
+//                                   .attr("class", "graph3-bar-block")
+//                                   .style("margin-bottom", "20px");
 
-    selectedBlock.append("div")
-                 .attr("class", "bar-title")
-                 .style("font-size", "14px")
-                 .style("font-weight", "600")
-                 .style("margin-bottom", "4px")
-                 .text("Selected Jurisdiction");
+//     overallBlock.append("div")
+//                 .attr("class", "bar-title")
+//                 .style("font-size", "14px")
+//                 .style("font-weight", "600")
+//                 .style("margin-bottom", "4px")
+//                 .text("Australia Overall");
 
-    const svgSelected = selectedBlock.append("svg")
-                                     .attr("id", "graph-3-selected")
-                                     .attr("width", containerWidth)
-                                     .attr("height", barHeight);
+//     const svgOverall = overallBlock.append("svg")
+//                                    .attr("id", "graph-3-overall")
+//                                    .attr("width", containerWidth)
+//                                    .attr("height", barHeight);
+
+
+//     const selectedBlock = container.append("div")
+//                                    .attr("class", "graph3-bar-block");
+
+//     selectedBlock.append("div")
+//                  .attr("class", "bar-title")
+//                  .style("font-size", "14px")
+//                  .style("font-weight", "600")
+//                  .style("margin-bottom", "4px")
+//                  .text("Selected Jurisdiction");
+
+//     const svgSelected = selectedBlock.append("svg")
+//                                      .attr("id", "graph-3-selected")
+//                                      .attr("width", containerWidth)
+//                                      .attr("height", barHeight);
 
 
 
-    const jurisdictions = [...new Set(preppedData
-        .map(d => d.jurisdiction)
-        .filter(d => d !== "Australia (Overall)")
-    )];
+//     const jurisdictions = [...new Set(preppedData
+//         .map(d => d.jurisdiction)
+//         .filter(d => d !== "Australia (Overall)")
+//     )];
 
-    const select = d3.select("#graph-3-select");
-    select.selectAll("option").remove();
-    select.selectAll("option")
-          .data(jurisdictions)
-          .enter()
-          .append("option")
-          .attr("value", d => d)
-          .text(d => d);
+//     const select = d3.select("#graph-3-select");
+//     select.selectAll("option").remove();
+//     select.selectAll("option")
+//           .data(jurisdictions)
+//           .enter()
+//           .append("option")
+//           .attr("value", d => d)
+//           .text(d => d);
 
-    const ausData = preppedData.filter(d => d.jurisdiction === "Australia (Overall)");
+//     const ausData = preppedData.filter(d => d.jurisdiction === "Australia (Overall)");
     
-    drawStackedBar(ausData, "#graph-3-overall", containerWidth);
+//     drawStackedBar(ausData, "#graph-3-overall", containerWidth);
 
-    // Lenged
-    container.selectAll(".graph-3-legend").remove();
+//     // Lenged
+//     container.selectAll(".graph-3-legend").remove();
 
-    const legend = container
-    .append("div")
-    .attr("class", "graph-3-legend")
-    .style("display", "flex")
-    .style("gap", "12px")
-    .style("margin-top", "8px");
+//     const legend = container
+//     .append("div")
+//     .attr("class", "graph-3-legend")
+//     .style("display", "flex")
+//     .style("gap", "12px")
+//     .style("margin-top", "8px");
 
-    ageOrder.forEach((age) => {
-    const item = legend.append("div")
-        .style("display", "flex")
-        .style("align-items", "center")
-        .style("gap", "6px");
+//     ageOrder.forEach((age) => {
+//     const item = legend.append("div")
+//         .style("display", "flex")
+//         .style("align-items", "center")
+//         .style("gap", "6px");
 
-    item.append("div")
-        .style("width", "12px")
-        .style("height", "12px")
-        .style("background-color", ageColorMapping(age));
+//     item.append("div")
+//         .style("width", "12px")
+//         .style("height", "12px")
+//         .style("background-color", ageColorMapping(age));
 
-    item.append("span")
-        .style("font-size", "12px")
-        .text(age);
-    });
+//     item.append("span")
+//         .style("font-size", "12px")
+//         .text(age);
+//     });
 
 
-    const first = jurisdictions[0];
-    updateStackedBar(first, containerWidth);
+//     const first = jurisdictions[0];
+//     updateStackedBar(first, containerWidth);
 
-    select.on("change", function () {
-        updateStackedBar(this.value, containerWidth);
-    });
-}
+//     select.on("change", function () {
+//         updateStackedBar(this.value, containerWidth);
+//     });
+// }
 
-const createGraph4 = (preppedData) => {
+// const createGraph4 = (preppedData) => {
 
-    const container = d3.select(".graph-4 .viz-container");
-    container.selectAll("*").remove(); // clean
+//     const container = d3.select(".graph-4 .viz-container");
+//     container.selectAll("*").remove(); // clean
 
-    const width = container.node().getBoundingClientRect().width;
-    const height = 260;
+//     const width = container.node().getBoundingClientRect().width;
+//     const height = 260;
 
-    const lolliBlock = container.append("div")
-                                .attr("class", "graph4-lollipop-block");
+//     const lolliBlock = container.append("div")
+//                                 .attr("class", "graph4-lollipop-block");
 
-    lolliBlock.append("div")
-              .attr("class", "bar-title")
-              .style("font-size", "12px")
-              .style("font-weight", "600")
-              .style("margin-bottom", "4px")
-              .text("Selected Jurisdiction");
+//     lolliBlock.append("div")
+//               .attr("class", "bar-title")
+//               .style("font-size", "12px")
+//               .style("font-weight", "600")
+//               .style("margin-bottom", "4px")
+//               .text("Selected Jurisdiction");
 
-    const svg = lolliBlock.append("svg")
-                          .attr("id", "graph-4-lollipop")
-                          .attr("width", width)
-                          .attr("height", height);
+//     const svg = lolliBlock.append("svg")
+//                           .attr("id", "graph-4-lollipop")
+//                           .attr("width", width)
+//                           .attr("height", height);
 
-    const jurisdictions = [...new Set(preppedData
-        .map(d => d.jurisdiction)
-        .filter(d => d !== "Australia (Overall)")
-    )];
+//     const jurisdictions = [...new Set(preppedData
+//         .map(d => d.jurisdiction)
+//         .filter(d => d !== "Australia (Overall)")
+//     )];
 
-    const select = d3.select("#graph-4-select");
-    select.selectAll("option").remove();
-    select.selectAll("option")
-          .data(jurisdictions)
-          .enter()
-          .append("option")
-          .attr("value", d => d)
-          .text(d => d);
+//     const select = d3.select("#graph-4-select");
+//     select.selectAll("option").remove();
+//     select.selectAll("option")
+//           .data(jurisdictions)
+//           .enter()
+//           .append("option")
+//           .attr("value", d => d)
+//           .text(d => d);
 
-    const first = jurisdictions[0];
-    update(first);
+//     const first = jurisdictions[0];
+//     update(first);
 
-    select.on("change", function () {
-        update(this.value);
-    });
+//     select.on("change", function () {
+//         update(this.value);
+//     });
 
-    function update(jur) {
-        const jurData = preppedData.filter(d => d.jurisdiction === jur);
-        drawLollipop(jurData, svg, width, height);
-    }
-}
+//     function update(jur) {
+//         const jurData = preppedData.filter(d => d.jurisdiction === jur);
+//         drawLollipop(jurData, svg, width, height);
+//     }
+// }
