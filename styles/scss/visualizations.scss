@@ -133,6 +133,12 @@
         gap: 30px;
         grid-template-columns: repeat(12, 1fr);
 
+        .viz-summary {
+            h1 {
+                text-align: center;
+            }
+        }
+
         .viz-content {
             background-color: $color-bg2;
             border: 1px solid $color-bg2;
@@ -143,7 +149,7 @@
 
             .viz-title {
                 margin-bottom: 20px;
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
 
             .viz-container {
@@ -170,16 +176,42 @@
             }
 
             &.graph-4 {
-                grid-column: span 12;
-                height: 400px;
+                grid-column: span 6;
+                // grid-row: span 2;
+                height: 500;
             }
 
             &.graph-5 {
                 grid-column: span 6;
-                height: 400px;
+                height: 500px;
             }
 
+            // &.filler-1 {
+            //     grid-column: span 7;
+            //     height: 200px;
+            // }
+
             &.graph-6 {
+                grid-column: span 7;
+                height: 450px;
+            }
+
+            &.graph-7 {
+                grid-column: span 5;
+                height: 450px;
+            }
+
+            &.graph-8 {
+                grid-column: span 12;
+                height: 400px;
+                
+                .viz-container {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                }
+            }
+
+            &.graph-9 {
                 grid-column: span 6;
                 height: 400px;
             }
@@ -194,22 +226,25 @@
     pointer-events: none;
     border-radius: 4px;
     border: 1px solid #ccc;
-    font-size: 12px;
+    font-size: 14px;
     color: $color-main;
     box-shadow: 0px 2px 6px rgba(0,0,0,0.15);
     opacity: 0;
     transition: opacity 0.1s ease;
 
-    &.graph-1 {
+    &.tooltip-graph-1,
+    &.tooltip-graph-3,
+    &.tooltip-graph-4,
+    &.tooltip-graph-5,
+    &.tooltip-graph-6,
+    &.tooltip-graph-7,
+    &.tooltip-graph-8,
+    &.tooltip-graph-9  {
         line-height: 1.4rem;
     }
 
-    &.graph-2 {
+    &.tooltip-graph-2 {
         line-height: 2rem;
-    }
-
-    &.graph-3 {
-        line-height: 1.4rem;
     }
 }
 

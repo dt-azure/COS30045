@@ -144,14 +144,196 @@ function addGraph3Interactions(g, arcs, arc, filtered) {
         });
 }
 
-// const addGraph4Interactions = (circles) => {
-//     circles.on("mouseover", (event, d) => {
-//       tooltip.style("opacity", 1)
-//              .html(`<strong>${d.age_group}</strong><br>${d.total_fines.toLocaleString()} fines`);
-//     }).on("mousemove", (event) => {
-//       tooltip.style("left", (event.pageX + 12) + "px")
-//              .style("top", (event.pageY + 12) + "px");
-//     }).on("mouseout", () => {
-//       tooltip.style("opacity", 0);
-//     });
-// }
+const addGraph4Interactions = (g, stackedData, x, y, color, offenceTypes) => {
+
+    const tooltip = d3.select(".tooltip-graph-4");
+
+    g.selectAll("g.layer").selectAll("rect")
+        .on("mousemove", function (event, d) {
+
+            const age = d.data.age_group;
+
+            const offence = d3.select(this.parentNode).datum().key;
+
+            const totalFines = d.data[offence] || 0;
+
+            const totalGroup = d3.sum(offenceTypes, t => d.data[t] || 0);
+
+            const pct = totalGroup > 0 ? (totalFines / totalGroup) : 0;
+
+            tooltip
+                .style("opacity", 1)
+                .html(`
+                    <strong>Age group: ${age}</strong><br>
+                    Offence: ${offence}<br>
+                    Fines: ${totalFines.toLocaleString()}<br>
+                    Share: ${d3.format(".1%")(pct)}
+                `)
+                .style("left", (event.pageX + 15) + "px")
+                .style("top", (event.pageY - 20) + "px");
+        })
+        .on("mouseleave", function () {
+            tooltip.style("opacity", 0);
+        });
+};
+
+const addGraph5Interactions = (g, stackedData, x, y, keys) => {
+
+    const tooltip = d3.select(".tooltip-graph-5");
+
+    g.selectAll("g.layer").selectAll("rect")
+        .on("mousemove", function(event, d) {
+
+            const age = d.data.age_group;
+            const detType = d3.select(this.parentNode).datum().key;
+
+            const raw = d.data[detType] || 0;
+
+            const total = d3.sum(keys.map(k => d.data[k] || 0));
+            const pct = total ? raw / total : 0;
+
+            tooltip
+                .style("opacity", 1)
+                .html(`
+                    <strong>Age group: ${age}</strong><br>
+                    Type: ${detType}<br>
+                    Percentage: ${d3.format(".1%")(pct)}
+                `)
+                .style("left", (event.pageX + 15) + "px")
+                .style("top", (event.pageY - 20) + "px");
+        })
+        .on("mouseleave", function() {
+            tooltip.style("opacity", 0);
+        });
+};
+
+const addGraph6Interactions = (cells) => {
+    const tooltip = d3.select(".tooltip-graph-6");
+
+    cells.on("mousemove", function(event, d) {
+        tooltip
+            .style("opacity", 1)
+            .html(`
+                <strong>Jurisdiction: ${d.jurisdiction}</strong><br>
+                Age group: ${d.age_group}<br>
+                Fine rate: ${(d.rate * 100).toFixed(1)}%
+            `)
+            .style("left", (event.pageX + 15) + "px")
+            .style("top", (event.pageY - 20) + "px");
+    })
+    .on("mouseleave", () => {
+        tooltip.style("opacity", 0);
+    });
+};
+
+
+const addGraph7Interactions = (boxGroups, stats, x, y, innerHeight) => {
+
+    const tooltip = d3.select(".tooltip-graph-7");
+
+    boxGroups.append("rect")
+        .attr("class", "hover-area")
+        .attr("x", -5)
+        .attr("width", x.bandwidth() + 10)
+        .attr("y", 0)
+        .attr("height", innerHeight)
+        .style("fill", "transparent")
+        .style("pointer-events", "all")
+        .on("mousemove", function (event, d) {
+
+            tooltip.style("opacity", 1)
+                .html(`
+                    <strong>Age group: ${d.age}</strong><br>
+                    Min: ${d.min.toFixed(4)}<br>
+                    Q1: ${d.q1.toFixed(4)}<br>
+                    Median: ${d.median.toFixed(4)}<br>
+                    Q3: ${d.q3.toFixed(4)}<br>
+                    Max: ${d.max.toFixed(4)}
+                `)
+                .style("left", (event.pageX + 15) + "px")
+                .style("top", (event.pageY - 10) + "px");
+        })
+        .on("mouseleave", function () {
+            tooltip.style("opacity", 0);
+        });
+};
+
+const addGraph8Interactions = (g, data, x, y, innerWidth, innerHeight, metricKey, color) => {
+    const marker = g.append("circle")
+        .attr("r", 4)
+        .attr("fill", color)
+        .attr("stroke", "white")
+        .attr("stroke-width", 2)
+        .style("opacity", 0);
+
+    g.append("rect")
+        .attr("width", innerWidth)
+        .attr("height", innerHeight)
+        .style("fill", "none")
+        .style("pointer-events", "all")
+        .on("mousemove", function(event) {
+
+            const [mx] = d3.pointer(event);
+            const hoveredDate = x.invert(mx);
+
+            const bisect = d3.bisector(d => d.date).left;
+            const i = bisect(data, hoveredDate);
+
+            const d0 = data[i - 1];
+            const d1 = data[i];
+            const d = (!d0) ? d1 :
+                      (!d1) ? d0 :
+                      (hoveredDate - d0.date > d1.date - hoveredDate ? d1 : d0);
+
+            marker
+                .style("opacity", 1)
+                .attr("cx", x(d.date))
+                .attr("cy", y(d[metricKey]));
+
+            metricKeyCleaned = metricKey.replace("total_", "").replace("_", " ");
+            tooltipGraph8
+                .interrupt()
+                .style("opacity", 1)
+                .html(`
+                    <strong>${d3.timeFormat("%b %Y")(d.date)}</strong><br>
+                    ${metricKeyCleaned.charAt(0).toUpperCase() + metricKeyCleaned.slice(1)}:
+                    ${d[metricKey].toLocaleString()}
+                `)
+                .style("left", (event.pageX + 12) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mouseleave", () => {
+            marker.style("opacity", 0);
+            tooltipGraph8.style("opacity", 0);
+        });
+}
+
+const addGraph9Interactions = (g, filtered, tooltipGraph9) => {
+    g.selectAll("rect")
+        .on("mousemove", function (event, d) {
+
+            const year = d.data.year;
+            const row = filtered.find(r => r.year === year);
+
+            tooltipGraph9
+                .interrupt()
+                .style("opacity", 1)
+                .html(`
+                    <strong>${year}</strong><br>
+                    Fines: ${row.fines.toLocaleString()} (${(row.fines_pct * 100).toFixed(1)}%)<br>
+                    Charges: ${row.charges.toLocaleString()} (${(row.charges_pct * 100).toFixed(1)}%)<br>
+                    Arrests: ${row.arrests.toLocaleString()} (${(row.arrests_pct * 100).toFixed(1)}%)
+                `)
+                .style("left", (event.pageX + 12) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mouseleave", () => {
+            tooltipGraph9.style("opacity", 0);
+        });
+};
+
+
+
+
+
+

@@ -45,5 +45,5 @@ storyButtons.forEach(btn => {
 });
 
 
-loadStory1();
-story1Loaded = true;
+loadStory3();
+story3Loaded = true;

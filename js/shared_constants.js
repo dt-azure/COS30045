@@ -56,10 +56,10 @@ const stateColorMapping = d3.scaleOrdinal()
 const offenceTypes = ["Mobile Phone Use", "Non-wearing Seatbelts", "Speeding", "Unlicensed Driving"];
 
 const offenceTypeColors = {
-  "Mobile Phone Use": "#3F72AF",
-  "Non-wearing Seatbelts": "#55A868",
-  "Speeding": "#C44E52",
-  "Unlicensed Driving": "#008DFF"
+  "Mobile Phone Use": "#55A868",
+  "Non-wearing Seatbelts": "#CCB974",
+  "Speeding": "#3F72AF",
+  "Unlicensed Driving": "#C44E52"
 };
 
 const offenceTypeColorMapping = d3.scaleOrdinal()
@@ -69,7 +69,7 @@ const offenceTypeColorMapping = d3.scaleOrdinal()
 const detectionTypes = ["Police Issued", "Camera Detection", "Other"];
 
 const detectionTypeColors = {
-  "Police Issued": "#008DFF",
-  "Camera Detection": "#EA801C",
+  "Police Issued": "#EA801C",
+  "Camera Detection": "#3F72AF",
   "Other": "#55A868"
 }

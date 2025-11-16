@@ -14,7 +14,7 @@ const mapTooltip = d3.select("body")
 const createGraph1 = (geojson, data) => {
     const tooltip = d3.select("body")
                       .append("div")
-                      .attr("class", "tooltip");
+                      .attr("class", "tooltip tooltip-graph-1");
 
     geojson.features = geojson.features.filter(f =>
         +f.properties.STATE_CODE >= 1 && +f.properties.STATE_CODE <= 8
@@ -118,7 +118,7 @@ const createGraph1 = (geojson, data) => {
 const createGraph2 = (data, selectedYear) => {
     const tooltip = d3.select("body")
                       .append("div")
-                      .attr("class", "tooltip");
+                      .attr("class", "tooltip tooltip-graph-2");
 
     const container = d3.select(".graph-2 .viz-container");
     container.selectAll("svg").remove();
@@ -243,8 +243,8 @@ const createGraph2 = (data, selectedYear) => {
 const createGraph3 = (data, selectedJurisdiction) => {
     const tooltip = d3.select("body")
                       .append("div")
-                      .attr("class", "tooltip");
-                      
+                      .attr("class", "tooltip tooltip-graph-3");
+
     const container = d3.select(".graph-3 .viz-container");
     container.selectAll("svg").remove();
 
@@ -276,6 +276,7 @@ const createGraph3 = (data, selectedJurisdiction) => {
                 total_fines: d.total_fines
             }));
     }
+    
 
     const pie = d3.pie()
         .value(d => d.total_fines)
