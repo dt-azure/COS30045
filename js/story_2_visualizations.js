@@ -1,4 +1,5 @@
 const createGraph4 = (data, selectedJurisdiction) => {
+    d3.select(".tooltip-graph-4").remove();
     d3.select("body")
       .append("div")
       .attr("class", "tooltip tooltip-graph-4");
@@ -128,6 +129,7 @@ const createGraph4 = (data, selectedJurisdiction) => {
 };
 
 const createGraph5 = (data, selectedJurisdiction) => {
+    d3.select(".tooltip-graph-5").remove();
     d3.select("body")
       .append("div")
       .attr("class", "tooltip tooltip-graph-5");
@@ -248,6 +250,7 @@ const createGraph5 = (data, selectedJurisdiction) => {
 };
 
 const createGraph6 = (data) => {
+    d3.select(".tooltip-graph-6").remove();
     d3.select("body")
       .append("div")
       .attr("class", "tooltip tooltip-graph-6");
@@ -367,6 +370,7 @@ const createGraph6 = (data) => {
 };
 
 const createGraph7 = (raw) => {
+    d3.select(".tooltip-graph-7").remove();
     d3.select("body")
       .append("div")
       .attr("class", "tooltip tooltip-graph-7");

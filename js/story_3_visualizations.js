@@ -1,3 +1,4 @@
+d3.select(".tooltip-graph-8").remove();
 let tooltipGraph8 = d3.select("body")
                     .append("div")
                     .attr("class", "tooltip tooltip-graph-8");
@@ -45,8 +46,17 @@ const drawMiniLineChart = (parent, data, metricKey, label, color) => {
         .style("text-anchor", "end")
         .style("font-size", "13px");
 
-    g.append("g").call(d3.axisLeft(y))
-                 .style("font-size", "13px");
+    y.domain([0, d3.max(data, d => d[metricKey])]).nice();
+
+    const yAxis = d3.axisLeft(y)
+        .ticks(4)
+        .tickFormat(d3.format(",.0f"));
+
+    g.append("g")
+        .call(yAxis)
+        .selectAll("text")
+        .style("fill", "#0b2540");
+
 
     g.append("text")
         .attr("x", 0)
@@ -126,7 +136,7 @@ const createGraph8 = (data, selectedJurisdiction) => {
 };
 
 const createGraph9 = (data, selectedJurisdiction) => {
-
+    d3.select(".tooltip-graph-9").remove();
     const tooltipGraph9 = d3.select("body")
                             .append("div")
                             .attr("class", "tooltip tooltip-graph-9")
@@ -227,6 +237,170 @@ const createGraph9 = (data, selectedJurisdiction) => {
 
     addGraph9Interactions(g, filtered, tooltipGraph9);
 };
+
+const createGraph10 = (rawData, selectedJurisdiction) => {
+    d3.selectAll(".tooltip-graph-10").remove();
+
+    const tooltipGraph10 = d3.select("body")
+        .append("div")
+        .attr("class", "tooltip tooltip-graph-10");
+
+    const container = d3.select(".graph-10 .viz-container");
+    container.selectAll("svg").remove();
+
+    const { width, height } = container.node().getBoundingClientRect();
+    const margin = { top: 70, right: 30, bottom: 60, left: 100 };
+    const innerWidth = width - margin.left - margin.right;
+    const innerHeight = height - margin.top - margin.bottom;
+
+    const svg = container.append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    const g = svg.append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const metrics = ["fines", "arrests", "charges"];
+
+    let filtered;
+
+    if (selectedJurisdiction === "Nationwide") {
+        filtered = ageOrder.map(age => {
+            const rows = rawData.filter(r => r.age_group === age);
+            return {
+                age_group: age,
+                fines: d3.sum(rows, d => d.fines),
+                arrests: d3.sum(rows, d => d.arrests),
+                charges: d3.sum(rows, d => d.charges)
+            };
+        });
+    } else {
+        filtered = rawData.filter(d => d.jurisdiction === selectedJurisdiction);
+    }
+
+    const longData = filtered.flatMap(row =>
+        metrics.map(metric => ({
+            age_group: row.age_group,
+            metric,
+            value: row[metric]
+        }))
+    );
+
+    const x = d3.scaleBand()
+        .domain(metrics)
+        .range([0, innerWidth])
+        .padding(0.15);
+
+    const y = d3.scaleBand()
+        .domain(ageOrder)
+        .range([0, innerHeight])
+        .padding(0.15);
+
+    const rawMax = d3.max(longData, d => d.value);
+
+    function roundMax(v) {
+        if (v > 1_000_000) return Math.ceil(v / 500_000) * 500_000;
+        if (v > 100_000)   return Math.ceil(v / 100_000) * 100_000;
+        return Math.ceil(v / 10_000) * 10_000;
+    }
+
+    const legendMax = roundMax(rawMax);
+    const logMax = Math.log(legendMax + 1);
+
+    const color = d3.scaleSequential()
+        .domain([0, logMax])
+        .interpolator(d3.interpolateBlues);
+
+    const cells = g.selectAll("rect")
+        .data(longData)
+        .enter()
+        .append("rect")
+        .attr("x", d => x(d.metric))
+        .attr("y", d => y(d.age_group))
+        .attr("width", x.bandwidth())
+        .attr("height", y.bandwidth())
+        .attr("fill", d => color(Math.log(d.value + 1)));
+
+    addGraph10Interactions(cells);
+
+    g.append("g")
+        .call(d3.axisLeft(y))
+        .selectAll("text")
+        .style("font-size", "13px");
+
+    g.append("g")
+        .attr("transform", `translate(0,${innerHeight})`)
+        .call(d3.axisBottom(x).tickFormat(d =>
+            d.charAt(0).toUpperCase() + d.slice(1)
+        ))
+        .selectAll("text")
+        .style("font-size", "13px");
+
+    const legendWidth = innerWidth - 40;
+    const legendHeight = 12;
+
+    const legendScale = d3.scaleLinear()
+        .domain([0, logMax])
+        .range([0, legendWidth]);
+
+    const legendTicks = [0, logMax];
+
+    const fmtLegend = t => {
+        let raw = Math.exp(t) - 1;
+        if (Math.abs(raw - legendMax) < 2) raw = legendMax;
+
+        if (raw >= 1_000_000) return (raw / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
+        if (raw >= 1000)      return (raw / 1000).toFixed(0) + "k";
+        return Math.round(raw);
+    };
+
+    const legendAxis = d3.axisBottom(legendScale)
+        .tickValues(legendTicks)
+        .tickFormat(fmtLegend);
+
+    const legend = svg.append("g")
+        .attr("transform", `translate(${margin.left}, ${margin.top - 35})`);
+
+    const defs = svg.append("defs");
+    const gradientId = "heatmap10-gradient";
+
+    const gradient = defs.append("linearGradient")
+        .attr("id", gradientId)
+        .attr("x1", "0%")
+        .attr("x2", "100%");
+
+    const STEPS = 80;
+    for (let i = 0; i <= STEPS; i++) {
+        const t = i / STEPS;
+        const linearValue = t * legendMax;
+        const logValue = Math.log(linearValue + 1);
+        gradient.append("stop")
+            .attr("offset", `${t * 100}%`)
+            .attr("stop-color", color(logValue));
+    }
+
+    legend.append("rect")
+        .attr("width", legendWidth)
+        .attr("height", legendHeight)
+        .style("fill", `url(#${gradientId})`);
+
+    legend.append("g")
+        .attr("transform", `translate(0, ${legendHeight})`)
+        .call(legendAxis)
+        .selectAll("text")
+        .style("font-size", "12px")
+        .style("fill", "#0b2540");
+
+    legend.append("text")
+        .attr("x", 0)
+        .attr("y", -10)
+        .style("font-size", "13px")
+        .style("font-weight", 600)
+        .style("fill", "#0b2540")
+        .text("Fine / Arrest / Charge Value");
+};
+
+
 
 
 

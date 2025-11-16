@@ -188,6 +188,10 @@
   grid-column: span 6;
   height: 400px;
 }
+.main .visualizations .viz-content.graph-10 {
+  grid-column: span 6;
+  height: 400px;
+}
 
 .tooltip {
   position: absolute;
@@ -202,7 +206,7 @@
   opacity: 0;
   transition: opacity 0.1s ease;
 }
-.tooltip.tooltip-graph-1, .tooltip.tooltip-graph-3, .tooltip.tooltip-graph-4, .tooltip.tooltip-graph-5, .tooltip.tooltip-graph-6, .tooltip.tooltip-graph-7, .tooltip.tooltip-graph-8, .tooltip.tooltip-graph-9 {
+.tooltip.tooltip-graph-1, .tooltip.tooltip-graph-3, .tooltip.tooltip-graph-4, .tooltip.tooltip-graph-5, .tooltip.tooltip-graph-6, .tooltip.tooltip-graph-7, .tooltip.tooltip-graph-8, .tooltip.tooltip-graph-9, .tooltip.tooltip-graph-10 {
   line-height: 1.4rem;
 }
 .tooltip.tooltip-graph-2 {

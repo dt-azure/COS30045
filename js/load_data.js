@@ -178,7 +178,7 @@ const loadStory2 = () => {
 }
 
 const loadStory3 = () => {
-    // Graph 8
+    // Graph 8 + 9
     d3.csv("./data/fine_charge_arrest_by_month_and_jurisdiction.csv", d => ({
         year: +d.year,
         month: +d.month,
@@ -187,81 +187,75 @@ const loadStory3 = () => {
         total_arrests: +d.total_arrests,
         total_charges: +d.total_charges,
         date: new Date(+d.year, +d.month - 1)
-    })).then(raw => {
-
-        const aggregated = d3.rollups(
-            raw,
-            v => ({
-                total_fines: d3.sum(v, d => d.total_fines),
-                total_arrests: d3.sum(v, d => d.total_arrests),
-                total_charges: d3.sum(v, d => d.total_charges),
-                date: new Date(v[0].year, v[0].month - 1)
-            }),
-            d => d.jurisdiction,
-            d => d.year,
-            d => d.month
-        ).flatMap(([jurisdiction, years]) =>
-            years.flatMap(([year, months]) =>
-                months.map(([month, vals]) => ({
-                    jurisdiction,
-                    year,
-                    month,
-                    ...vals
-                }))
-            )
-        );
-
-        const jurisdictions = Array.from(new Set(aggregated.map(d => d.jurisdiction))).sort();
+    }))
+    .then(data => {
+        // Graph 8
+        const jurisdictions = Array.from(new Set(data.map(d => d.jurisdiction))).sort();
         jurisdictions.unshift("Nationwide");
 
-        const dropdown = d3.select("#graph-8-select")
-            .on("change", function () {
-                createGraph8(aggregated, this.value);
-            });
+        const dropdownGraph8 = d3.select("#graph-8-select");
 
-        dropdown.selectAll("option")
+        dropdownGraph8.selectAll("option")
             .data(jurisdictions)
             .enter()
             .append("option")
             .text(d => d)
             .attr("value", d => d);
 
-        dropdown.property("value", "Nationwide");
+        dropdownGraph8.property("value", "Nationwide");
 
-        createGraph8(aggregated, "Nationwide");
-    }).catch(error => {
-        console.log("Error loading data: ", error);
+        createGraph8(data, "Nationwide");
+
+        dropdownGraph8.on("change", function () {
+            createGraph8(data, this.value);
+        });
+
+        // Graph 9
+
+        const dropdownGraph9 = d3.select("#graph-9-select");
+
+        dropdownGraph9.selectAll("option")
+            .data(jurisdictions)
+            .enter()
+            .append("option")
+            .text(d => d)
+            .attr("value", d => d);
+
+        dropdownGraph9.property("value", "Nationwide");
+
+        createGraph9(data, "Nationwide");
+
+        dropdownGraph9.on("change", function () {
+            createGraph9(data, this.value);
+        });
     });
 
-    // Graph 9
-    d3.csv("./data/fine_charge_arrest_by_month_and_jurisdiction.csv", d => ({
-    year: +d.year,
-    month: +d.month,
-    jurisdiction: d.jurisdiction,
-    total_fines: +d.total_fines,
-    total_arrests: +d.total_arrests,
-    total_charges: +d.total_charges
-})).then(data => {
+    // Graph 10
+    d3.csv("./data/fine_charge_arrest_by_age_and_jurisdiction.csv", d => ({
+        jurisdiction: d.jurisdiction,
+        age_group: d.age_group,
+        fines: +d.total_fines,
+        arrests: +d.total_arrests,
+        charges: +d.total_charges
+    })).then(data => {
+        const jurisdictions = Array.from(new Set(data.map(d => d.jurisdiction))).sort();
+        jurisdictions.unshift("Nationwide");
 
-    const jurisdictions = Array.from(new Set(data.map(d => d.jurisdiction))).sort();
-    jurisdictions.unshift("Nationwide");
+        const dropdownGraph10 = d3.select("#graph-10-select");
+        dropdownGraph10.selectAll("option")
+            .data(jurisdictions)
+            .enter()
+            .append("option")
+            .attr("value", d => d)
+            .text(d => d);
 
-    const dropdown = d3.select("#graph-9-select");
+        dropdownGraph10.property("value", "Nationwide");
 
-    dropdown.selectAll("option")
-        .data(jurisdictions)
-        .enter()
-        .append("option")
-        .text(d => d)
-        .attr("value", d => d);
+        createGraph10(data, "Nationwide");
 
-    dropdown.property("value", "Nationwide");
-
-    createGraph9(data, "Nationwide");
-
-    dropdown.on("change", function () {
-        createGraph9(data, this.value);
+        dropdownGraph10.on("change", function () {
+            createGraph10(data, this.value);
+        });
     });
-});
-
 };
+

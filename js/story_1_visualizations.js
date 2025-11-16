@@ -12,6 +12,7 @@ const mapTooltip = d3.select("body")
 
 
 const createGraph1 = (geojson, data) => {
+    d3.select(".tooltip-graph-1").remove();
     const tooltip = d3.select("body")
                       .append("div")
                       .attr("class", "tooltip tooltip-graph-1");
@@ -116,6 +117,7 @@ const createGraph1 = (geojson, data) => {
 
 
 const createGraph2 = (data, selectedYear) => {
+    d3.select(".tooltip-graph-2").remove();
     const tooltip = d3.select("body")
                       .append("div")
                       .attr("class", "tooltip tooltip-graph-2");
@@ -241,6 +243,7 @@ const createGraph2 = (data, selectedYear) => {
 }
 
 const createGraph3 = (data, selectedJurisdiction) => {
+    d3.select(".tooltip-graph-3").remove();
     const tooltip = d3.select("body")
                       .append("div")
                       .attr("class", "tooltip tooltip-graph-3");

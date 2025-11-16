@@ -295,7 +295,7 @@ const addGraph8Interactions = (g, data, x, y, innerWidth, innerHeight, metricKey
                 .interrupt()
                 .style("opacity", 1)
                 .html(`
-                    <strong>${d3.timeFormat("%b %Y")(d.date)}</strong><br>
+                    <strong>Year: ${d3.timeFormat("%b %Y")(d.date)}</strong><br>
                     ${metricKeyCleaned.charAt(0).toUpperCase() + metricKeyCleaned.slice(1)}:
                     ${d[metricKey].toLocaleString()}
                 `)
@@ -331,6 +331,31 @@ const addGraph9Interactions = (g, filtered, tooltipGraph9) => {
             tooltipGraph9.style("opacity", 0);
         });
 };
+
+function addGraph10Interactions(cells) {
+    let tooltip = d3.select(".tooltip-graph-10");
+    if (tooltip.empty()) {
+        tooltip = d3.select("body")
+            .append("div")
+            .attr("class", "tooltip tooltip-graph-10");
+    }
+
+    cells
+        .on("mousemove", function(event, d) {
+            tooltip
+                .style("opacity", 1)
+                .html(`
+                    <strong>Age group: ${d.age_group}</strong><br>
+                    Metric: ${d.metric.charAt(0).toUpperCase() + d.metric.slice(1)}<br>
+                    Value: ${d.value.toLocaleString()}
+                `)
+                .style("left", (event.pageX + 12) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mouseleave", () => tooltip.style("opacity", 0));
+}
+
+
 
 
 
