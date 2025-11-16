@@ -110,6 +110,9 @@
   gap: 30px;
   grid-template-columns: repeat(12, 1fr);
 }
+.main .visualizations .viz-summary {
+  width: 100%;
+}
 .main .visualizations .viz-summary h1 {
   text-align: center;
 }
