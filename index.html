@@ -17,12 +17,12 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">DASHBOARD</div>
+                <div class="logo">THE DASHBOARD</div>
                 <div class="nav-bar">
                     <ul>
-                        <li class="home-nav-btn">Home</li>
-                        <li class="about-nav-btn">About Us</li>
-                        <li class="contact-nav-btn">Contact</li>
+                        <li id="home-nav-btn">Home</li>
+                        <li id="about-nav-btn">About Us</li>
+                        <li id="contact-nav-btn">Contact</li>
                     </ul>
                 </div>
             </div>
@@ -33,80 +33,107 @@
         <div class="container">
             <div class="main-content">
                 <div class="left-panel">
-                    <div class="dashboard-info">
-                        <h1>INFO</h1>
+                    <div class="dashboard-info info-story-overview active">
+                    </div>
+
+                    <div class="dashboard-info info-story-1">
+                        <h1>Offence Distribution & Enforcement Activity</h1>
 
                         <p>
-                            Our visualization enables users to explore enforcement patterns by year, jurisdiction, detection type, location, and age group while identifying which demographics dominate specific offence types such as speeding, unlicensed driving, seat belt, and phone use.
+                            We will be examining what types of offences occur most often and how enforcement actions (fines, charges, arrests) are distributed across jurisdictions.
+                        </p>
+
+                        <p>
+                            This story highlights which offence categories dominate overall counts and how enforcement patterns differ between states and territories during 2023-2024.
+                        </p>
+                    </div>
+
+                    <div class="dashboard-info info-story-2">
+                        <h1>Demographic Patterns in Enforcement</h1>
+
+                        <p>
+                             This story explores how enforcement varies by age group.
+                        </p>
+
+                        <p>
+                            The visualizations show which age groups are more likely to incur fines, charges, or arrests, and how these patterns shift across jurisdictions in 2023-2024.
+                        </p>
+                    </div>
+
+                    <div class="dashboard-info info-story-3">
+                        <h1>Enforcement Trends Over Time</h1>
+
+                        <p>
+                            This story focuses on how fines, charges, and arrests evolve month-to-month over the 2023-2024 period.
+                        </p>
+
+                        <p>
+                            By comparing the three categories, we can observe seasonal trends, spikes, downturns, and how enforcement intensity changes over time within each jurisdiction or nationwide.
                         </p>
                     </div>
                 </div>
 
                 <div class="right-panel">
                     <div class="stories-switch">
-                        <button class="story-btn active" data-story="1">Story 1</button>
-                        <button class="story-btn" data-story="2">Story 2</button>
-                        <button class="story-btn" data-story="3">Story 3</button>
+                        <button class="story-btn active" data-story="overview">Overview</button>
+                        <button class="story-btn" data-story="1">The Landscape</button>
+                        <button class="story-btn" data-story="2">Bias</button>
+                        <button class="story-btn" data-story="3">Fines, Arrests and Charges</button>
                     </div>
 
-                    <!-- <div class="stat-cards">
-                        <div class="card">
-                            <div class="stats">
-                                <p>Percentage</p>
-                                <p>100%</p>
-                            </div>
 
-                            <div class="card-icon">
-                                <i class="fa-solid fa-chart-pie"></i>
-                            </div>
+                    <div id="loading-screen" class="story-page">
+                        <div class="loading-screen-icon">
+                            <div class="loader"></div>
+                            <p>Loading visualizations...</p>
                         </div>
+                    </div>
 
-                        <div class="card">
-                            <div class="stats">
-                                <p>Mean</p>
-                                <p>12.34</p>
+                    <div class="story-page story-overview active">
+                            <div class="viz-summary">
+                                <h1>Traffic Safety and Law Enforcement</h1>
+
+                                <p>This report presents an in-depth analysis of road traffic law enforcement data. The primary goal is to uncover trends, identify violation patterns, and assess fairness in enforcement practices.</p>
+                                <p>To clarify these complex aspects, the analysis is structured into three main narratives:</p>
+
+                                <h3>Story 1: The Landscape</h3>
+                                <p>The first section provides a broad overview of enforcement activities. It begins by examining enforcement trends over time, specifically monthly fine amounts - to determine whether enforcement is stable, seasonal, or influenced by specific events. Next, it analyzes the breakdown of offence types to answer the question: “What are the most common road safety violations?” Finally, it compares jurisdictions more fairly by normalizing fines per capita, rather than relying on absolute figures.</p>
+                            
+                                <h3>Story 2: Age and Bias</h3>
+                                <p>The second narrative focuses on human factors, particularly the relationship between age, violation type, and detection method. It analyzes violation patterns across age groups to see if different age groups tend to commit different types of offences. A key component is the analysis of detection methods (e.g., camera vs. direct police intervention), normalized by age, to examine whether certain age groups are more likely to be detected by specific methods. This analysis uses visualizations (heatmaps, box plots) to identify signs of fairness or bias in how age groups are treated.</p>
+
+                                <h3>Story 3: Fines, Arrests, and Charges</h3>
+                                <p>The final narrative delves into the severity of enforcement actions beyond fines. It examines all three indicators, arrests, and charges—over time to assess whether enforcement is becoming more punitive. Furthermore, it analyzes the proportion of each enforcement type and uses heatmaps to answer key questions such as: “Which age group is more likely to face punitive measures?” and “Are younger individuals charged more frequently than older ones?”</p>
+                                
+                                <p>Through these three analytical stories, the report aims to provide a comprehensive and multidimensional view of the effectiveness and fairness of current traffic safety policies.</p>
                             </div>
-
-                            <div class="card-icon">
-                                <i class="fa-solid fa-chart-line"></i>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="stats">
-                                <p>Total</p>
-                                <p>100,000</p>
-                            </div>
-
-                            <div class="card-icon">
-                                <i class="fa-solid fa-chart-simple"></i>
-                            </div>
-                        </div>
-                    </div> -->
-
-                    <div class="story-page story-1 active">
+                    </div>
+                    
+                    <div class="story-page story-1">
                         <div class="visualizations">
                             <div class="viz-content graph-1">
                                 <div class="viz-title">
-                                    <h3>Total Fines By Jurisdiction, 2022 - 2024</h3>
+                                    <h3>Total Fines By Jurisdiction, 2023 - 2024</h3>
                                 </div>
                                 <div class="viz-container"></div>
                             </div>
 
                             <div class="viz-content graph-2">
                                 <div class="viz-title">
-                                    <h3>Violation Type Breakdown</h3>
+                                    <h3>Fines Issued Trend, 2023 - 2024</h3>
                                 </div>
+
+                                <div class="viz-controls">
+                                    <label for="graph-1-select">Year:</label>
+                                    <select id="graph-1-select"></select>
+                                </div>
+
                                 <div class="viz-container"></div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="story-page story-2">
-                        <div class="visualizations">
                             <div class="viz-content graph-3">
                                 <div class="viz-title">
-                                    <h3>Total Fines By Jurisdiction</h3>
+                                    <h3>Violation Type Breakdown, 2023 - 2024</h3>
                                 </div>
 
                                 <div class="viz-controls">
@@ -116,15 +143,106 @@
 
                                 <div class="viz-container"></div>
                             </div>
+
+                            <!-- <div class="viz-content graph-4">
+                                <div class="viz-title">
+                                    <h3>Violation Type Breakdown</h3>
+                                </div>
+                                <div class="viz-container"></div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="story-page story-2">
+                        <div class="visualizations">
+                            <div class="viz-content graph-4">
+                                <div class="viz-title">
+                                    <h3>Fine Distribution by Age</h3>
+                                </div>
+
+                                <div class="viz-controls">
+                                    <label for="graph-4-select">Jurisdiction:</label>
+                                    <select id="graph-4-select"></select>
+                                </div>
+
+                                <div class="viz-container"></div>
+                            </div>
+
+                            <!-- <div class="viz-content filler-1">
+                                <div class="viz-title">
+                                    <h3>Total Fines by Age Group</h3>
+                                </div>
+                            </div> -->
+
+                            <div class="viz-content graph-5">
+                                <div class="viz-title">
+                                    <h3>Detection Method Distribution by Age</h3>
+                                </div>
+
+                                <div class="viz-controls">
+                                    <label for="graph-5-select">Jurisdiction:</label>
+                                    <select id="graph-5-select"></select>
+                                </div>
+
+                                <div class="viz-container"></div>
+                            </div>
+
+                            <div class="viz-content graph-6">
+                                <div class="viz-title">
+                                    <h3>Heatmap of Fine Rate per Capita x Age Group</h3>
+                                </div>
+
+                                <div class="viz-container"></div>
+                            </div>
+
+                            <div class="viz-content graph-7">
+                                <div class="viz-title">
+                                    <h3>Fine Rate per Capita by Age Group</h3>
+                                </div>
+
+                                <div class="viz-container"></div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="story-page story-3">
                         <div class="visualizations">
-                            <div class="viz-content graph-1">
+                            <div class="viz-content graph-8">
                                 <div class="viz-title">
-                                    <h3>Total Fines By Jurisdiction</h3>
+                                    <h3>Fine Rate per Capita by Age Group</h3>
                                 </div>
+
+                                <div class="viz-controls">
+                                    <label for="graph-8-select">Jurisdiction:</label>
+                                    <select id="graph-8-select"></select>
+                                </div>
+
+                                <div class="viz-container"></div>
+                            </div>
+
+                            <div class="viz-content graph-9">
+                                <div class="viz-title">
+                                    <h3>Fine Rate per Capita by Age Group</h3>
+                                </div>
+
+                                <div class="viz-controls">
+                                    <label for="graph-9-select">Jurisdiction:</label>
+                                    <select id="graph-9-select"></select>
+                                </div>
+
+                                <div class="viz-container"></div>
+                            </div>
+
+                            <div class="viz-content graph-10">
+                                <div class="viz-title">
+                                    <h3></h3>
+                                </div>
+
+                                <div class="viz-controls">
+                                    <label for="graph-10-select">Jurisdiction:</label>
+                                    <select id="graph-10-select"></select>
+                                </div>
+
                                 <div class="viz-container"></div>
                             </div>
                         </div>
@@ -136,7 +254,15 @@
 
     <footer>
         <div class="container">
+            <div class="footer-content">
+                <div class="creator">
+                    COS30045 - Data Visualization | <span>Designed by Nguyen Duc Trung, Le Minh Kha, Bui Quang Doan</span>
+                </div>
 
+                <div class="declaration">
+                    This website was made with the help of generative AI.
+                </div>
+            </div>
         </div>
     </footer>
 
@@ -144,6 +270,7 @@
     <script src="./js/shared_constants.js"></script>
     <script src="./js/load_data.js"></script>
     <script src="./js/scripts.js"></script>
+    <script src="./js/dashboard_scripts.js"></script>
     <script src="./js/interactions.js"></script>
     <script src="./js/story_1_visualizations.js"></script>
     <script src="./js//story_2_visualizations.js"></script>
