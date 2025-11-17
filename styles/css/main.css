@@ -1,0 +1,155 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #F4F7FE;
+  color: #112D4E;
+}
+
+.container {
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+header, footer {
+  padding: 20px 0;
+}
+
+header {
+  border-bottom: 1px solid #D9D9D9;
+}
+header .header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header .logo {
+  font-size: 2rem;
+  font-weight: 800;
+}
+header .nav-bar ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 30px;
+}
+header .nav-bar li {
+  list-style-type: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+header .nav-bar li::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: #3F72AF;
+  transition: width 0.2s ease, left 0.2s ease;
+  transform: translateX(-50%);
+}
+header .nav-bar li:hover {
+  font-weight: 600;
+  color: #3F72AF;
+}
+header .nav-bar li:hover::after {
+  width: 100%;
+  left: 50%;
+}
+
+#homepage header #home-nav-btn, #about-page header #about-nav-btn, #contact-page header #contact-nav-btn {
+  font-weight: 600;
+}
+
+footer {
+  border-top: 1px solid #D9D9D9;
+  margin-top: 40px;
+}
+footer .footer-content .creator {
+  text-align: center;
+  margin-bottom: 15px;
+}
+footer .footer-content .creator span {
+  font-weight: 700;
+}
+footer .footer-content .declaration {
+  text-align: center;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: #767676;
+}
+
+#loading-screen {
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 9999;
+  position: relative;
+}
+#loading-screen .loading-screen-icon {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#loading-screen .loading-screen-icon .loader {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #3F72AF;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+#loading-screen .loading-screen-icon p {
+  margin-top: 20px;
+  color: #0b2540;
+  font-size: 1rem14px;
+  font-weight: 500;
+}
+
+.about-us-content {
+  width: 80vw;
+  margin: 0 auto;
+}
+.about-us-content h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  margin-top: 30px;
+}
+.about-us-content p {
+  text-align: justify;
+  line-height: 2rem;
+  margin-bottom: 20px;
+}
+.about-us-content ul li {
+  margin-left: 30px;
+  margin-bottom: 20px;
+}
+
+.contact-content {
+  width: 80vw;
+  margin: 40px auto;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}/*# sourceMappingURL=main.css.map */
