@@ -12,12 +12,6 @@
         padding-right: 15px;
 
         .dashboard-info {
-            display: none;
-
-            &.active {
-                display: block;
-            }
-
             h1 {
                 font-weight: 900;
                 font-size: 3rem;
@@ -128,29 +122,6 @@
         }
     }
 
-    .viz-summary {
-            width: 100%;
-            background-color: #ffffff;
-            padding: 15px 30px;
-            border: 1px solid #ffffff;
-            border-radius: 8px;
-
-            h1 {
-                text-align: center;
-                margin-bottom: 20px;
-            }
-
-            p {
-                line-height: 1.6rem;
-                text-align: justify;
-            }
-
-            h3 {
-                margin-top: 30px;
-                margin-bottom: 15px;
-            }
-        }
-
     .visualizations {
         display: grid;
         gap: 30px;
@@ -166,7 +137,7 @@
 
             .viz-title {
                 margin-bottom: 20px;
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
 
             .viz-container {
@@ -183,57 +154,26 @@
             }
 
             &.graph-2 {
-                grid-column: span 7;
-                height: 450px;
+                grid-column: span 12;
+                height: 600px;
             }
 
             &.graph-3 {
-                grid-column: span 5;
-                height: 450px;
+                grid-column: span 6;
+                height: 400px;
             }
 
             &.graph-4 {
-                grid-column: span 6;
-                // grid-row: span 2;
-                height: 500;
+                grid-column: span 12;
+                height: 400px;
             }
 
             &.graph-5 {
                 grid-column: span 6;
-                height: 500px;
+                height: 400px;
             }
-
-            // &.filler-1 {
-            //     grid-column: span 7;
-            //     height: 200px;
-            // }
 
             &.graph-6 {
-                grid-column: span 7;
-                height: 450px;
-            }
-
-            &.graph-7 {
-                grid-column: span 5;
-                height: 450px;
-            }
-
-            &.graph-8 {
-                grid-column: span 12;
-                height: 400px;
-                
-                .viz-container {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr 1fr;
-                }
-            }
-
-            &.graph-9 {
-                grid-column: span 6;
-                height: 400px;
-            }
-
-            &.graph-10 {
                 grid-column: span 6;
                 height: 400px;
             }
@@ -242,46 +182,11 @@
 }
 
 .tooltip {
-    position: absolute;
-    padding: 6px 10px;
-    background: white;
-    pointer-events: none;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    color: $color-main;
-    box-shadow: 0px 2px 6px rgba(0,0,0,0.15);
-    opacity: 0;
-    transition: opacity 0.1s ease;
-
-    &.tooltip-graph-1,
-    &.tooltip-graph-3,
-    &.tooltip-graph-4,
-    &.tooltip-graph-5,
-    &.tooltip-graph-6,
-    &.tooltip-graph-7,
-    &.tooltip-graph-8,
-    &.tooltip-graph-9,
-    &.tooltip-graph-10  {
+    &.graph-1 {
         line-height: 1.4rem;
     }
 
-    &.tooltip-graph-2 {
+    &.graph-2 {
         line-height: 2rem;
-    }
-}
-
-.viz-controls {
-    margin-bottom: 30px;
-}
-
-.viz-controls {
-    select {
-        margin-left: 10px;
-        padding: 3px 10px;
-        font-size: 14px;
-        border: 1px solid $color-main;
-        border-radius: 4px;
-        background: none;
     }
 }

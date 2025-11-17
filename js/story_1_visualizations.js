@@ -12,19 +12,12 @@ const mapTooltip = d3.select("body")
 
 
 const createGraph1 = (geojson, data) => {
-    d3.select(".tooltip-graph-1").remove();
-    const tooltip = d3.select("body")
-                      .append("div")
-                      .attr("class", "tooltip tooltip-graph-1");
 
     geojson.features = geojson.features.filter(f =>
         +f.properties.STATE_CODE >= 1 && +f.properties.STATE_CODE <= 8
     );
 
     const container = d3.select(".graph-1 .viz-container");
-
-    container.selectAll("svg").remove();
-
     const { width, height } = container.node().getBoundingClientRect();
 
     const svg = container.append("svg")
@@ -116,199 +109,115 @@ const createGraph1 = (geojson, data) => {
 }
 
 
-const createGraph2 = (data, selectedYear) => {
-    d3.select(".tooltip-graph-2").remove();
-    const tooltip = d3.select("body")
-                      .append("div")
-                      .attr("class", "tooltip tooltip-graph-2");
-
+const createGraph2 = (data) => {
     const container = d3.select(".graph-2 .viz-container");
-    container.selectAll("svg").remove();
+    const { width, height } = container.node().getBoundingClientRect();
 
-    const { width: outerWidth, height: outerHeight } = container.node().getBoundingClientRect();
+    const innerWidth = width - margin.left - margin.right;
+    const innerHeight = height - margin.top - margin.bottom;
 
-    const localMargin = {
-        top: margin.top,
-        right: margin.right,
-        bottom: Math.max(margin.bottom, 70),
-        left: margin.left + 10
-    };
+    const ageOrder = ["0-16", "17-25", "26-39", "40-64", "65 and over"];
 
-    const adjustedHeight = outerHeight * 1.0;
-    const innerWidth = outerWidth - localMargin.left - localMargin.right;
-    const innerHeight = adjustedHeight - localMargin.top - localMargin.bottom;
+    const nested = d3.rollups(
+        data,
+        v => ({
+        Camera: d3.sum(v.filter(x => x.detection_group === "Camera"), x => x.percentage),
+        "Police Issued": d3.sum(v.filter(x => x.detection_group === "Police Issued"), x => x.percentage),
+        Other: d3.sum(v.filter(x => x.detection_group === "Other"), x => x.percentage)
+        }),
+        d => d.age_group
+    ).map(([age_group, obj]) => ({ age_group, ...obj }));
 
-    const filtered = data
-        .filter(d => d.year === selectedYear)
-        .map(d => ({
-            ...d,
-            date: new Date(d.year, d.month - 1)
-        }))
-        .sort((a, b) => a.date - b.date);
+    const methods = ["Camera", "Police Issued", "Other"];
 
-    if (!filtered.length) {
-        container.append("div")
-            .attr("class", "no-data")
-            .text(`No data for ${selectedYear}`);
-        return;
-    }
+    const stackGen = d3.stack()
+                       .keys(methods);
 
-    const avgFines = d3.mean(filtered, d => d.total_fines);
+    const stacked = stackGen(nested);
 
-    const svg = container.append("svg")
-        .attr("width", outerWidth)
-        .attr("height", adjustedHeight);
-
-    const g = svg.append("g")
-        .attr("transform", `translate(${localMargin.left},${localMargin.top})`);
-
-    const x = d3.scaleTime()
-        .domain([d3.min(filtered, d => d.date), d3.max(filtered, d => d.date)])
-        .range([0, innerWidth]);
-
-    const minFines = d3.min(filtered, d => d.total_fines);
-    const maxFines = d3.max(filtered, d => d.total_fines);
+    const x = d3.scaleBand()
+                .domain(ageOrder)
+                .range([0, innerWidth])
+                .padding(0.3);
 
     const y = d3.scaleLinear()
-            .domain([minFines * 0.9, maxFines * 1.05])
-            .range([innerHeight, 0]);
+                .domain([0, 100])
+                .range([innerHeight, 0]);
 
-
-    const line = d3.line()
-        .x(d => x(d.date))
-        .y(d => y(d.total_fines))
-        .curve(d3.curveMonotoneX);
-
-    g.append("path")
-        .datum(filtered)
-        .attr("fill", "none")
-        .attr("stroke", "#3F72AF")
-        .attr("stroke-width", 2)
-        .attr("d", line);
-
-    g.append("line")
-        .attr("x1", 0)
-        .attr("x2", innerWidth)
-        .attr("y1", y(avgFines))
-        .attr("y2", y(avgFines))
-        .attr("stroke", colorGrey)
-        .attr("stroke-width", 2)
-        .attr("stroke-dasharray", "6 4");
-
-    g.append("text")
-        .attr("x", innerWidth - 6)
-        .attr("y", y(avgFines) - 6)
-        .attr("text-anchor", "end")
-        .attr("fill", colorGrey)
-        .attr("font-size", "12px")
-        .text(`Avg: ${Math.round(avgFines).toLocaleString()}`);
-
-    const xAxis = d3.axisBottom(x)
-        .ticks(d3.timeMonth.every(1))
-        .tickFormat(d3.timeFormat("%b %Y"));
-
-    const xg = g.append("g")
-        .attr("transform", `translate(0,${innerHeight})`)
-        .call(xAxis);
-
-    xg.selectAll("text")
-        .style("font-size", "11px")
-        .style("fill", "#0b2540")
-        .attr("transform", "rotate(-40)")
-        .attr("text-anchor", "end")
-        .attr("dx", "-0.4em")
-        .attr("dy", "0.25em");
-
-    g.append("g")
-        .call(d3.axisLeft(y).ticks(5))
-        .selectAll("text")
-            .style("fill", "#0b2540");
-
-    g.append("text")
-        .attr("class", "axis-label")
-        .attr("x", innerWidth / 2)
-        .attr("y", innerHeight + localMargin.bottom - 10)
-        .attr("text-anchor", "middle")
-        .text("Month");
-
-    g.append("text")
-        .attr("class", "axis-label")
-        .attr("x", -innerHeight / 2)
-        .attr("y", -localMargin.left + 15)
-        .attr("transform", "rotate(-90)")
-        .attr("text-anchor", "middle")
-        .text("Total Fines");
-
-    addGraph2Interactions(g, filtered, x, y, innerWidth, innerHeight);
-}
-
-const createGraph3 = (data, selectedJurisdiction) => {
-    d3.select(".tooltip-graph-3").remove();
-    const tooltip = d3.select("body")
-                      .append("div")
-                      .attr("class", "tooltip tooltip-graph-3");
-
-    const container = d3.select(".graph-3 .viz-container");
-    container.selectAll("svg").remove();
-
-    const { width, height } = container.node().getBoundingClientRect();
-    const radius = Math.min(width, height) / 2 * 0.85;
+    const color = d3.scaleOrdinal()
+                    .domain(methods)
+                    .range(d3.schemeSet2);
 
     const svg = container.append("svg")
-        .attr("width", width)
-        .attr("height", height);
+                         .attr("width", width)
+                         .attr("height", height);
 
     const g = svg.append("g")
-        .attr("transform", `translate(${width / 2}, ${height / 2})`);
+                 .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    let filtered;
-
-    if (selectedJurisdiction === "Nationwide") {
-        const totals = d3.rollups(
-            data,
-            v => d3.sum(v, d => d.total_fines),
-            d => d.offence_type
-        ).map(([offence_type, total_fines]) => ({ offence_type, total_fines }));
-
-        filtered = totals;
-    } else {
-        filtered = data
-            .filter(d => d.jurisdiction === selectedJurisdiction)
-            .map(d => ({
-                offence_type: d.offence_type,
-                total_fines: d.total_fines
-            }));
-    }
+    g.selectAll("g.layer")
+     .data(stacked)
+     .enter()
+     .append("g")
+     .attr("fill", d => color(d.key))
+     .selectAll("rect")
+     .data(d => d)
+     .enter()
+     .append("rect")
+     .attr("x", d => x(d.data.age_group))
+     .attr("y", d => y(d[1]))
+     .attr("height", d => y(d[0]) - y(d[1]))
+     .attr("width", x.bandwidth());
     
+    const hoverBars = g.selectAll(".hover-bar")
+                       .data(nested)
+                       .enter()
+                       .append("rect")
+                       .attr("class", "hover-bar")
+                       .attr("x", d => x(d.age_group))
+                       .attr("y", 0)
+                       .attr("width", x.bandwidth())
+                       .attr("height", innerHeight)
+                       .attr("fill", "transparent");
 
-    const pie = d3.pie()
-        .value(d => d.total_fines)
-        .sort(null);
 
-    const arcs = pie(filtered);
+    const xAxis = g.append("g")
+                   .attr("transform", `translate(0,${innerHeight})`)
+                   .call(d3.axisBottom(x));
 
-    const arc = d3.arc()
-        .outerRadius(radius)
-        .innerRadius(0);
+    xAxis.selectAll("text")
+         .style("font-size", "14px")
+         .style("font-weight", "500");
 
-    const labelArc = d3.arc()
-        .outerRadius(radius * 0.7)
-        .innerRadius(radius * 0.7);
+    const yAxis = g.append("g")
+                   .call(d3.axisLeft(y).tickFormat(d => d + "%"));
 
-    const totalSum = d3.sum(filtered, d => d.total_fines);
+    yAxis.selectAll("text")
+         .style("font-size", "14px")
+         .style("font-weight", "500");
 
-    addGraph3Interactions(g, arcs, arc, filtered);
+    const legend = svg.append("g")
+                      .attr("transform", `translate(${(width / 2) - 140}, ${height - margin.bottom + 30})`); 
 
-    // g.selectAll("text")
-    //     .data(arcs)
-    //     .enter()
-    //     .append("text")
-    //     .attr("transform", d => `translate(${labelArc.centroid(d)})`)
-    //     .attr("text-anchor", "middle")
-    //     .style("font-size", "12px")
-    //     .text(d => {
-    //         const pct = d.data.total_fines / totalSum;
-    //         return pct >= 0.04 ? d3.format(".0%")(pct) : "";
-    //     });
-};
+    methods.forEach((m, i) => {
+    const xPos = i * 140;
 
+    legend.append("rect")
+          .attr("x", xPos)
+          .attr("y", 0)
+          .attr("width", 20)
+          .attr("height", 20)
+          .attr("fill", color(m));
+
+    legend.append("text")
+          .attr("x", xPos + 26)
+          .attr("y", 15)
+          .attr("font-size", 14)
+          .attr("fill", "#333")
+          .text(m);
+    });
+
+
+
+    addGraph2Interactions(hoverBars);
+}

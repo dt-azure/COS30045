@@ -17,7 +17,7 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">THE DASHBOARD</div>
+                <div class="logo">DASHBOARD</div>
                 <div class="nav-bar">
                     <ul>
                         <li class="home-nav-btn">Home</li>
@@ -34,20 +34,19 @@
             <div class="main-content">
                 <div class="left-panel">
                     <div class="dashboard-info">
-                        <!-- <h1>INFO</h1>
+                        <h1>INFO</h1>
 
                         <p>
                             Our visualization enables users to explore enforcement patterns by year, jurisdiction, detection type, location, and age group while identifying which demographics dominate specific offence types such as speeding, unlicensed driving, seat belt, and phone use.
-                        </p> -->
+                        </p>
                     </div>
                 </div>
 
                 <div class="right-panel">
                     <div class="stories-switch">
-                        <button class="story-btn active" data-story="overview">Overview</button>
-                        <button class="story-btn" data-story="1">The Landscape</button>
-                        <button class="story-btn" data-story="2">Bias</button>
-                        <button class="story-btn" data-story="3">Fines, Arrests and Charges</button>
+                        <button class="story-btn active" data-story="1">Story 1</button>
+                        <button class="story-btn" data-story="2">Story 2</button>
+                        <button class="story-btn" data-story="3">Story 3</button>
                     </div>
 
                     <!-- <div class="stat-cards">
@@ -85,51 +84,29 @@
                         </div>
                     </div> -->
 
-                    <div class="story-page story-overview active">
-                            <div class="viz-summary">
-                                <h1>Traffic Safety and Law Enforcement</h1>
-
-                                <p>This report presents an in-depth analysis of road traffic law enforcement data. The primary goal is to uncover trends, identify violation patterns, and assess fairness in enforcement practices.</p>
-                                <p>To clarify these complex aspects, the analysis is structured into three main narratives:</p>
-
-                                <h3>Story 1: The Landscape</h3>
-                                <p>The first section provides a broad overview of enforcement activities. It begins by examining enforcement trends over time, specifically monthly fine amounts - to determine whether enforcement is stable, seasonal, or influenced by specific events. Next, it analyzes the breakdown of offence types to answer the question: “What are the most common road safety violations?” Finally, it compares jurisdictions more fairly by normalizing fines per capita, rather than relying on absolute figures.</p>
-                            
-                                <h3>Story 2: Age and Bias</h3>
-                                <p>The second narrative focuses on human factors, particularly the relationship between age, violation type, and detection method. It analyzes violation patterns across age groups to see if different age groups tend to commit different types of offences. A key component is the analysis of detection methods (e.g., camera vs. direct police intervention), normalized by age, to examine whether certain age groups are more likely to be detected by specific methods. This analysis uses visualizations (heatmaps, box plots) to identify signs of fairness or bias in how age groups are treated.</p>
-
-                                <h3>Story 3: Fines, Arrests, and Charges</h3>
-                                <p>The final narrative delves into the severity of enforcement actions beyond fines. It examines all three indicators, arrests, and charges—over time to assess whether enforcement is becoming more punitive. Furthermore, it analyzes the proportion of each enforcement type and uses heatmaps to answer key questions such as: “Which age group is more likely to face punitive measures?” and “Are younger individuals charged more frequently than older ones?”</p>
-                                
-                                <p>Through these three analytical stories, the report aims to provide a comprehensive and multidimensional view of the effectiveness and fairness of current traffic safety policies.</p>
-                            </div>
-                    </div>
-                    
-                    <div class="story-page story-1">
+                    <div class="story-page story-1 active">
                         <div class="visualizations">
                             <div class="viz-content graph-1">
                                 <div class="viz-title">
-                                    <h3>Total Fines By Jurisdiction, 2023 - 2024</h3>
+                                    <h3>Total Fines By Jurisdiction, 2022 - 2024</h3>
                                 </div>
                                 <div class="viz-container"></div>
                             </div>
 
                             <div class="viz-content graph-2">
                                 <div class="viz-title">
-                                    <h3>Fines Issued Trend, 2023 - 2024</h3>
+                                    <h3>Violation Type Breakdown</h3>
                                 </div>
-
-                                <div class="viz-controls">
-                                    <label for="graph-1-select">Year:</label>
-                                    <select id="graph-1-select"></select>
-                                </div>
-
                                 <div class="viz-container"></div>
                             </div>
+                        </div>
+                    </div>
 
+                    <div class="story-page story-2">
+                        <div class="visualizations">
                             <div class="viz-content graph-3">
                                 <div class="viz-title">
-                                    <h3>Violation Type Breakdown, 2023 - 2024</h3>
+                                    <h3>Total Fines By Jurisdiction</h3>
                                 </div>
 
                                 <div class="viz-controls">
@@ -139,106 +116,15 @@
 
                                 <div class="viz-container"></div>
                             </div>
-
-                            <!-- <div class="viz-content graph-4">
-                                <div class="viz-title">
-                                    <h3>Violation Type Breakdown</h3>
-                                </div>
-                                <div class="viz-container"></div>
-                            </div> -->
-                        </div>
-                    </div>
-
-                    <div class="story-page story-2">
-                        <div class="visualizations">
-                            <div class="viz-content graph-4">
-                                <div class="viz-title">
-                                    <h3>Fine Distribution by Age</h3>
-                                </div>
-
-                                <div class="viz-controls">
-                                    <label for="graph-4-select">Jurisdiction:</label>
-                                    <select id="graph-4-select"></select>
-                                </div>
-
-                                <div class="viz-container"></div>
-                            </div>
-
-                            <!-- <div class="viz-content filler-1">
-                                <div class="viz-title">
-                                    <h3>Total Fines by Age Group</h3>
-                                </div>
-                            </div> -->
-
-                            <div class="viz-content graph-5">
-                                <div class="viz-title">
-                                    <h3>Detection Method Distribution by Age</h3>
-                                </div>
-
-                                <div class="viz-controls">
-                                    <label for="graph-5-select">Jurisdiction:</label>
-                                    <select id="graph-5-select"></select>
-                                </div>
-
-                                <div class="viz-container"></div>
-                            </div>
-
-                            <div class="viz-content graph-6">
-                                <div class="viz-title">
-                                    <h3>Heatmap of Fine Rate per Capita x Age Group</h3>
-                                </div>
-
-                                <div class="viz-container"></div>
-                            </div>
-
-                            <div class="viz-content graph-7">
-                                <div class="viz-title">
-                                    <h3>Fine Rate per Capita by Age Group</h3>
-                                </div>
-
-                                <div class="viz-container"></div>
-                            </div>
                         </div>
                     </div>
 
                     <div class="story-page story-3">
                         <div class="visualizations">
-                            <div class="viz-content graph-8">
+                            <div class="viz-content graph-1">
                                 <div class="viz-title">
-                                    <h3>Fine Rate per Capita by Age Group</h3>
+                                    <h3>Total Fines By Jurisdiction</h3>
                                 </div>
-
-                                <div class="viz-controls">
-                                    <label for="graph-8-select">Jurisdiction:</label>
-                                    <select id="graph-8-select"></select>
-                                </div>
-
-                                <div class="viz-container"></div>
-                            </div>
-
-                            <div class="viz-content graph-9">
-                                <div class="viz-title">
-                                    <h3>Fine Rate per Capita by Age Group</h3>
-                                </div>
-
-                                <div class="viz-controls">
-                                    <label for="graph-9-select">Jurisdiction:</label>
-                                    <select id="graph-9-select"></select>
-                                </div>
-
-                                <div class="viz-container"></div>
-                            </div>
-
-                            <div class="viz-content graph-10">
-                                <div class="viz-title">
-                                    <h3></h3>
-                                </div>
-
-                                <div class="viz-controls">
-                                    <label for="graph-10-select">Jurisdiction:</label>
-                                    <select id="graph-10-select"></select>
-                                </div>
-
                                 <div class="viz-container"></div>
                             </div>
                         </div>
@@ -250,21 +136,12 @@
 
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="creator">
-                    COS30045 - Data Visualization | <span>Designed by Nguyen Duc Trung, Le Minh Kha, Bui Quang Doan</span>
-                </div>
 
-                <div class="declaration">
-                    This website was made with the help of generative AI.
-                </div>
-            </div>
         </div>
     </footer>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="./js/shared_constants.js"></script>
-    <script src="./js/helper.js"></script>
     <script src="./js/load_data.js"></script>
     <script src="./js/scripts.js"></script>
     <script src="./js/interactions.js"></script>

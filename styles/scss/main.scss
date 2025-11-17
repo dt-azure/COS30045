@@ -77,26 +77,3 @@ header {
 #homepage header .home-nav-btn, #about-page header .about-nav-btn, #contact-page header .contact-nav-btn {
     font-weight: 600;
 }
-
-footer {
-    border-top: 1px solid $color-border;
-    margin-top: 40px;
-
-    .footer-content {
-        .creator {
-            text-align: center;
-            margin-bottom: 15px;
-
-            span {
-                font-weight: 700;
-            }
-        }
-
-        .declaration {
-            text-align: center;
-            font-size: 0.8rem;
-            font-style: italic;
-            color: $color-grey;
-        }
-    }
-}
