@@ -309,7 +309,7 @@ const createGraph10 = (rawData, selectedJurisdiction) => {
 
     const color = d3.scaleSequential()
         .domain([0, logMax])
-        .interpolator(d3.interpolateBlues);
+        .interpolator(t => d3.interpolateBlues(t * 0.7 + 0.3)); // darker blues
 
     const cells = g.selectAll("rect")
         .data(longData)
@@ -330,33 +330,28 @@ const createGraph10 = (rawData, selectedJurisdiction) => {
 
     g.append("g")
         .attr("transform", `translate(0,${innerHeight})`)
-        .call(d3.axisBottom(x).tickFormat(d =>
-            d.charAt(0).toUpperCase() + d.slice(1)
-        ))
+        .call(
+            d3.axisBottom(x)
+                .tickFormat(d => d.charAt(0).toUpperCase() + d.slice(1))
+        )
         .selectAll("text")
         .style("font-size", "13px");
 
     const legendWidth = innerWidth - 40;
     const legendHeight = 12;
 
-    const legendScale = d3.scaleLinear()
-        .domain([0, logMax])
+    const legendScale = d3.scaleLog()
+        .domain([1, legendMax + 1])
         .range([0, legendWidth]);
 
-    const legendTicks = [0, logMax];
-
-    const fmtLegend = t => {
-        let raw = Math.exp(t) - 1;
-        if (Math.abs(raw - legendMax) < 2) raw = legendMax;
-
-        if (raw >= 1_000_000) return (raw / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
-        if (raw >= 1000)      return (raw / 1000).toFixed(0) + "k";
-        return Math.round(raw);
-    };
-
     const legendAxis = d3.axisBottom(legendScale)
-        .tickValues(legendTicks)
-        .tickFormat(fmtLegend);
+        .tickValues([1, legendMax + 1])
+        .tickFormat(d => {
+            const raw = d - 1;
+            if (raw >= 1_000_000) return (raw / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
+            if (raw >= 1000)      return (raw / 1000).toFixed(0) + "k";
+            return Math.round(raw);
+        });
 
     const legend = svg.append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top - 35})`);
@@ -369,13 +364,15 @@ const createGraph10 = (rawData, selectedJurisdiction) => {
         .attr("x1", "0%")
         .attr("x2", "100%");
 
-    const STEPS = 80;
+
+    const STEPS = 200;
     for (let i = 0; i <= STEPS; i++) {
         const t = i / STEPS;
-        const linearValue = t * legendMax;
-        const logValue = Math.log(linearValue + 1);
+        const value = (legendMax + 1) ** t - 1;
+        const logValue = Math.log(value + 1);
+
         gradient.append("stop")
-            .attr("offset", `${t * 100}%`)
+            .attr("offset", `${(legendScale(value + 1) / legendWidth) * 100}%`)
             .attr("stop-color", color(logValue));
     }
 
@@ -399,6 +396,7 @@ const createGraph10 = (rawData, selectedJurisdiction) => {
         .style("fill", "#0b2540")
         .text("Fine / Arrest / Charge Value");
 };
+
 
 
 
